@@ -2,57 +2,197 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZustMeal - Delicious Meals Everyday</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ZustMeal - Home-cooked Meals</title>
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+
+  <!-- AOS Animation -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      background: rgb(255, 200, 15);
+      color: rgb(240, 30, 40);
+      overflow-x: hidden;
+    }
+    header {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+      color: white;
+    }
+    header video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(0.6);
+    }
+    header .content {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .cta-button {
+      background: rgb(240, 30, 40);
+      padding: 15px 30px;
+      border-radius: 10px;
+      color: white;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .cta-button:hover {
+      background: darkred;
+      transform: scale(1.05);
+    }
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 30px;
+      margin: 20px;
+      transition: all 0.4s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    .whatsapp-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgb(240, 30, 40);
+      color: white;
+      border-radius: 50%;
+      padding: 15px;
+      font-size: 24px;
+      text-decoration: none;
+      z-index: 999;
+    }
+    #thankyou {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      border: 4px solid rgb(240, 30, 40);
+      text-align: center;
+      z-index: 1000;
+    }
+  </style>
 </head>
+
 <body>
-  <header data-aos="fade-up">
+
+<header>
+  <video autoplay muted loop playsinline>
+    <source src="istockphoto-1159778404-640_adpp_is.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+  <div class="content" data-aos="fade-up">
     <h1>Welcome to ZustMeal</h1>
-    <p>Delicious, Homestyle Meals Delivered Fresh Everyday!</p>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSe1F4C9qhzZFyP1PFd4scx9oMYkw_eqtxNzbD-dw_iYMfBkRQ/viewform?usp=sharing" class="cta-button">Order Now</a>
-  </header>
-  <section class="menu" id="menu" data-aos="fade-up">
-    <h2>Today's Menu</h2>
-    <div class="card">Butter Paneer Box</div>
-    <div class="card">Chicken Biryani Delight</div>
-    <div class="card">Homestyle Veg Thali</div>
-    <div class="card">Spicy Egg Curry Combo</div>
-  </section>
-  <section class="pricing" id="pricing" data-aos="fade-up">
-    <h2>Our Pricing</h2>
-    <div class="card">Daily Meal - Rs 120</div>
-    <div class="card">Weekly Plan - Rs 799</div>
-    <div class="card">Monthly Subscription - Rs 2999</div>
-  </section>
-  <section class="features" id="features" data-aos="fade-up">
-    <h2>Features</h2>
-    <div class="card">Fresh Ingredients</div>
-    <div class="card">Home-cooked</div>
-    <div class="card">Fast Delivery</div>
-    <div class="card">Customizable Meals</div>
-  </section>
-  <section class="testimonials" id="testimonials" data-aos="fade-up">
-    <h2>Happy Customers</h2>
-    <div class="card">"Tastes just like home!" - Priya S.</div>
-    <div class="card">"Fast and hot delivery!" - Rohit M.</div>
-    <div class="card">"Best tiffin service ever!" - Anjali R.</div>
-  </section>
-  <section class="faqs" id="faqs" data-aos="fade-up">
-    <h2>FAQs</h2>
-    <div class="faq" onclick="toggleFAQ(0)">How do I order? <div class="faq-answer">Just click 'Order Now' and fill the form!</div></div>
-    <div class="faq" onclick="toggleFAQ(1)">What are the delivery times? <div class="faq-answer">We deliver lunch and dinner on time, every day.</div></div>
-    <div class="faq" onclick="toggleFAQ(2)">Can I customize my meal? <div class="faq-answer">Absolutely! Tell us your preferences while ordering.</div></div>
-  </section>
-  <a href="https://wa.me/919365294816" class="whatsapp-button" target="_blank">💬</a>
-  <div id="popup">
-    <h2>Today's Special!</h2>
-    <img src="https://via.placeholder.com/300x200.png?text=Butter+Chicken" alt="Special">
-    <p>Chef’s Signature Butter Chicken - Only Rs 250!</p>
-    <button onclick="closePopup()">Order Now</button>
+    <p>Fresh, Delicious, Home-cooked Meals Delivered Daily!</p>
+    <a href="#orderform" class="cta-button">Order Now</a>
   </div>
-  <script src="scripts.js"></script>
+</header>
+
+<section id="orderform" data-aos="fade-up">
+  <h2>Order Your Meal</h2>
+  <form id="orderForm">
+    <input type="text" name="entry.1111111111" placeholder="Your Name" required>
+    <input type="number" name="entry.2222222222" placeholder="Your Age" required>
+    <select name="entry.3333333333" required>
+      <option value="">Are you a Student or Working Professional?</option>
+      <option>Student</option>
+      <option>Working Professional</option>
+    </select>
+    <input type="text" name="entry.4444444444" placeholder="Where do you study/work?" required>
+    <input type="text" name="entry.5555555555" placeholder="How do you usually arrange lunch/dinner?" required>
+    <input type="number" name="entry.6666666666" placeholder="Current spend per day on meals (Rs.)" required>
+    <input type="text" name="entry.7777777777" placeholder="What would convince you to switch to tiffin service?" required>
+    <select name="entry.8888888888" required>
+      <option value="">Daily or Monthly Subscription?</option>
+      <option>Daily</option>
+      <option>Monthly</option>
+    </select>
+    <select name="entry.9999999999" required>
+      <option value="">Preferred Type of Meal?</option>
+      <option>Veg</option>
+      <option>Non-Veg</option>
+      <option>Both</option>
+    </select>
+    <select name="entry.1010101010" required>
+      <option value="">Would you like to try our tiffin service?</option>
+      <option>Yes</option>
+      <option>No</option>
+    </select>
+    <textarea name="entry.1212121212" placeholder="Any additional comments or suggestions?"></textarea>
+    <input type="text" name="entry.1313131313" placeholder="Your Contact Number" required>
+    <input type="email" name="entry.1414141414" placeholder="Your Email-ID" required>
+    <button type="submit" class="cta-button">Submit</button>
+  </form>
+</section>
+
+<!-- Thank You Popup -->
+<div id="thankyou">
+  <h2>Thank you for ordering with ZustMeal!</h2>
+  <p>We will get in touch with you soon. Stay Hungry, Stay Happy!</p>
+</div>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/919365294816" class="whatsapp-button" target="_blank">💬</a>
+
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+
+  document.getElementById('orderForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const form = e.target;
+    fetch('https://docs.google.com/forms/d/e/1FAIpQLSe1F4C9qhzZFyP1PFd4scx9oMYkw_eqtxNzbD-dw_iYMfBkRQ/formResponse', {
+      method: 'POST',
+      mode: 'no-cors',
+      body: new FormData(form)
+    }).then(() => {
+      document.getElementById('thankyou').style.display = 'block';
+      form.reset();
+      setTimeout(() => {
+        document.getElementById('thankyou').style.display = 'none';
+      }, 4000);
+    });
+  });
+</script>
+
 </body>
 </html>
