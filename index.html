@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ZustMeal Landing Page</title>
+  <style>
+    :root {
+      --yellow: rgb(255, 200, 45);
+      --red: rgb(220, 40, 30);
+      --text-dark: #1a1a1a;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: white;
+      color: var(--text-dark);
+      scroll-behavior: smooth;
+    }
+
+    .hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .hero video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 5;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      color: var(--red);
+    }
+
+    /* Typing Animation without Cursor */
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 4s steps(40) 1s forwards;
+      font-weight: bold;
+      color: #ffffff;  /* White color */
+    }
+
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
+    }
+
+    .btn {
+      background: var(--red);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      background-color: rgb(200, 30, 20);
+    }
+
+    section {
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
+
+    .section-heading {
+      font-size: 2rem;
+      color: var(--red);
+      margin-bottom: 2rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid-cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .grid-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .grid-cols-4 {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .card {
+      background: var(--yellow);
+      border: 2px solid var(--red);
+      border-radius: 1rem;
+      padding: 2rem;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      background-color: var(--yellow);
+      padding: 1.5rem;
+      text-align: center;
+      color: var(--text-dark);
+    }
+
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: white;
+      padding: 0.75rem 1rem;
+      border-radius: 999px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .whatsapp-btn:hover {
+      background-color: #1ebc5a;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <video autoplay muted loop>
+      <source src="C:\Users\Admin\Downloads\VN20250502_040151.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1 style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+  <span>Welcome to</span>
+  <img src="C:\Users\Admin\Downloads\your-logo-url-here.png" alt="ZustMeal Logo" style="height: 3.8rem;" />
+</h1>
+
+      <p>Delicious, affordable, home-style tiffins delivered to your door. Powered by local kitchens.</p>
+      <a href="#choose-plan" class="btn">Try 3-Day Trial Plan →</a>
+    </div>
+  </div>
+
+  <!-- How it Works Section -->
+  <section>
+    <h2 class="section-heading">How ZustMeal Works</h2>
+    <div class="grid grid-cols-3">
+      <div><h3>🥘Choose Your Taste</h3><p>Select from verified partner kitchens offering tasty, hygienic meals.</p></div>
+      <div><h3>🏍Get It Delivered</h3><p>Delivered by us — hot, fresh, and on time.</p></div>
+      <div><h3>💚 Enjoy Everyday</h3><p>Affordable, home-style meals designed for students, office-goers & more.</p></div>
+    </div>
+  </section>
+
+  <!-- Why Choose Section -->
+  <section style="background-color: #fef9f0;">
+    <h2 class="section-heading">Why Choose ZustMeal?</h2>
+    <div class="grid grid-cols-4">
+      <div><h3>✅ Verified Kitchens</h3><p>Only trusted, FSSAI-certified partner kitchens.</p></div>
+      <div><h3>📦 Flexible Plans</h3><p>Daily, weekly & monthly options to suit your routine.</p></div>
+      <div><h3>💳 Easy Payments</h3><p>UPI, Online payment — accepted.</p></div>
+      <div><h3>📞 Customer Support</h3><p>Chat with us instantly on WhatsApp for help anytime.</p></div>
+    </div>
+  </section>
+
+  <!-- Choose Plan Section -->
+  <section id="choose-plan">
+    <h2 class="section-heading">🍽️ Flexible Meal Plans</h2>
+    <div class="grid grid-cols-3">
+      <div class="card">
+        <h3>3-Day Trial</h3>
+        <p><strong>Only ₹159 • 3 Meals</strong></p>
+        <p>Try us out — no commitments.</p>
+        <a href="price.html" class="btn">Choose Plan</a>
+      </div>
+      <div class="card">
+        <h3>Mid-Month Magic</h3>
+        <p>Enjoy 15 days of homestyle meals.</p>
+        <a href="price.html" class="btn">Choose Your Plan</a>
+      </div>
+      <div class="card">
+        <h3>Monthly Munchies</h3>
+        <p>Perfect for regular tiffin needs.</p>
+        <a href="price.html" class="btn">Choose Your Plan</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Refer and Earn -->
+  <section style="background-color: #fef9f0;">
+    <h2 class="section-heading">Refer and Earn</h2>
+    <p>Invite your friends and get ₹50 credit when they subscribe.</p>
+    <a 
+      href="https://wa.me/919365294816?text=Yo%2C%20send%20me%20my%20referral%20link.%20I%20want%20to%20refer%20a%20friend."
+      class="btn"
+      style="background-color: green;"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Refer a Friend
+    </a>
+  </section>
+
+  <!-- WhatsApp Floating Chat -->
+  <a
+    href="https://wa.me/919365294816?text=Hi%20ZustMeal.%20I'm%20new%20in%20the%20city%20and%20interested%20in%20your%20tiffin%20service.%20Can%20you%20please%20share%20the%20menu%20and%20trial%20plan%20details%3F"
+    class="whatsapp-btn"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Chat
+  </a>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 ZustMeal. Made with ❤️ for your hunger.</p>
+  </footer>
+
+</body>
+</html>
