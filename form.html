@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ZustMeal Plan Form</title>
+  <style>
+    :root {
+      --yellow: rgb(255, 200, 45);
+      --red: #dc281e;
+      --text-dark: #000000;
+      --light-bg: #fff8ef;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--yellow);
+      color: #1a1a1a;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.7rem;
+      color: var(--red);
+    }
+
+    header p {
+      font-size: 0.95rem;
+      margin: 0.3rem 0 0;
+    }
+
+    main {
+      max-width: 95%;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.07);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.9rem;
+      border: 1px solid #ccc;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      background: #fefefe;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--red);
+      background: #fffdf8;
+    }
+
+    button {
+  padding: 0.2rem 1.05rem;
+  background-color: var(--red);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Makes the button full width on smaller screens */
+  max-width: 210px; /* Ensures it doesn't get too wide on larger screens */
+  margin: 0 auto; /* Centers the button horizontally */
+  display: block;
+}
+
+@media (max-width: 600px) {
+  button {
+    width: 65%; /* Slightly reduce width for mobile */
+  }
+}
+
+
+    button:hover {
+      background-color: #b02018;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: var(--yellow);
+      color: var(--text-dark);
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    @media (min-width: 600px) {
+      main {
+        max-width: 520px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Complete Your Plan</h1>
+    <p>We just need a few more details</p>
+  </header>
+
+  <main>
+    <form id="plan-form">
+      <input type="hidden" id="selected-plan" name="selected_plan" />
+
+      <div>
+        <label for="name">Full Name</label>
+        <input type="text" required name="name" id="name" placeholder="Your Name" />
+      </div>
+
+      <div>
+        <label for="phone">Contact Number</label>
+        <input type="tel" required name="phone" id="phone" placeholder="10-digit number" pattern="[0-9]{10}" />
+      </div>
+
+      <div>
+        <label for="alt_phone">Alternate Contact Number</label>
+        <input type="tel" name="alt_phone" id="alt_phone" placeholder="Optional alternate number" />
+      </div>
+
+      <div>
+        <label for="email">Email Address</label>
+        <input type="email" name="email" id="email" placeholder="example@email.com" />
+      </div>
+
+      <div>
+        <label for="address">Full Delivery Address</label>
+        <textarea required name="address" id="address" rows="3" placeholder="Complete address with area, landmark, etc."></textarea>
+      </div>
+
+      <div>
+        <label for="pincode">Pin Code</label>
+        <input type="text" required name="pincode" id="pincode" pattern="[0-9]{6}" placeholder="6-digit PIN" />
+      </div>
+
+      <div>
+        <label for="flatname">House / Flat / PG Name</label>
+        <input type="text" required name="flatname" id="flatname" placeholder="e.g., Green Residency, PG Elite" />
+      </div>
+
+      <div>
+        <label for="slot">Preferred Delivery Time Slot</label>
+        <select required name="slot" id="slot">
+          <option value="">Select Time Slot</option>
+          <option value="1-3">1:00 PM - 3:00 PM</option>
+          <option value="3-5">3:00 PM - 5:00 PM</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="payment_mode">Mode of Payment</label>
+        <select required name="payment_mode" id="payment_mode">
+          <option value="">Select Payment Mode</option>
+          <option value="upi">UPI</option>
+          <option value="bank">Bank Transfer</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="transaction_id">Transaction ID</label>
+        <input type="text" required name="transaction_id" id="transaction_id" placeholder="Enter Transaction Reference" />
+      </div>
+
+      <div id="referral-group" class="hidden">
+        <label for="referral">Referral ID (Optional)</label>
+        <input type="text" name="referral" id="referral" placeholder="e.g. ZUST30" />
+      </div>
+
+      <button type="submit">Submit My Meal Plan</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>© 2025 ZustMeal. Made with ❤️ for your hunger.</p>
+  </footer>
+
+  <script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const plan = urlParams.get('plan');
+  const selectedPlanInput = document.getElementById('selected-plan');
+  const referralGroup = document.getElementById('referral-group');
+
+  if (plan) {
+    selectedPlanInput.value = plan;
+    if (plan === 'trial') {
+      referralGroup.classList.remove('hidden');
+    }
+  } else {
+    alert("No plan selected. Please go back and choose a plan.");
+    document.getElementById('plan-form').classList.add('hidden');
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      document.getElementById('name').scrollIntoView({ behavior: 'smooth' });
+    }, 300);
+  });
+
+  document.getElementById('plan-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const data = new URLSearchParams();
+
+  data.append("Date", new Date().toLocaleString());
+  data.append("Full Name", form.name.value);
+  data.append("Contact Number", form.phone.value);
+  data.append("Alternate Contact Number", form.alt_phone.value);
+  data.append("Email Address", form.email.value);
+  data.append("Full Delivery Address", form.address.value);
+  data.append("Pin Code", form.pincode.value);
+  data.append("House/Flat/PG Name", form.flatname.value);
+  data.append("Delivery Time Slot", form.slot.value);
+  data.append("Payment Mode", form.payment_mode.value);
+  data.append("Transaction ID", form.transaction_id.value);
+  data.append("Referral ID", form.referral.value || "");
+
+  fetch("https://script.google.com/macros/s/AKfycbweGis6lRGqBzfHToT44_9tKzFw1xsQ4gzEmcDMR8Pk7GHyirlrFtP2Tn3y6tYfT2uU/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: data.toString()
+  })
+
+    .then(res => res.json())
+    .then(response => {
+      if (response.result === "success") {
+        alert("✅ Form submitted successfully!");
+        form.reset();
+      } else {
+        alert("❌ Something went wrong: " + response.error);
+      }
+    })
+    .catch(error => {
+      alert("🚨 Network error. Please try again later.");
+      console.error("Error:", error);
+    });
+  });
+</script>
+
+</body>
+</html>
