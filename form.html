@@ -84,12 +84,12 @@
     }
 
     button {
-      padding: 0.2rem 1.05rem;
+      padding: 0.4rem 0.4rem;
       background-color: var(--red);
       color: white;
       border: none;
       border-radius: 30px;
-      font-size: 0.8rem;
+      font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.3s ease;
@@ -105,23 +105,6 @@
 
     .hidden {
       display: none;
-    }
-
-    .copy-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: #fefefe;
-      padding: 0.75rem 1rem;
-      border-radius: 0.75rem;
-      border: 1px solid #ccc;
-    }
-
-    .copy-icon {
-      cursor: pointer;
-      font-weight: bold;
-      color: var(--red);
-      user-select: none;
     }
 
     footer {
@@ -144,6 +127,43 @@
         max-width: 520px;
       }
     }
+
+    /* Modal */
+    #status-modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 360px;
+    }
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid var(--red);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -156,41 +176,13 @@
     <form id="plan-form">
       <input type="hidden" id="selected-plan" name="selected_plan" />
 
-      <div>
-        <label for="name">Full Name</label>
-        <input type="text" required name="name" id="name" placeholder="Your Name" />
-      </div>
-
-      <div>
-        <label for="phone">Contact Number</label>
-        <input type="tel" required name="phone" id="phone" placeholder="10-digit number" pattern="[0-9]{10}" />
-      </div>
-
-      <div>
-        <label for="alt_phone">Alternate Contact Number</label>
-        <input type="tel" name="alt_phone" id="alt_phone" placeholder="Optional alternate number" />
-      </div>
-
-      <div>
-        <label for="email">Email Address</label>
-        <input type="email" required name="email" id="email" placeholder="example@email.com" />
-      </div>
-
-      <div>
-        <label for="address">Full Delivery Address</label>
-        <textarea required name="address" id="address" rows="3" placeholder="Complete address with area, landmark, etc."></textarea>
-      </div>
-
-      <div>
-        <label for="pincode">Pin Code</label>
-        <input type="text" required name="pincode" id="pincode" pattern="[0-9]{6}" placeholder="6-digit PIN" />
-      </div>
-
-      <div>
-        <label for="flatname">House / Flat / PG Name</label>
-        <input type="text" required name="flatname" id="flatname" placeholder="e.g., Green Residency, PG Elite" />
-      </div>
-
+      <div><label for="name">Full Name</label><input type="text" required name="name" id="name" placeholder="Your Name" /></div>
+      <div><label for="phone">Contact Number</label><input type="tel" required name="phone" id="phone" pattern="[0-9]{10}" placeholder="10-digit number" /></div>
+      <div><label for="alt_phone">Alternate Contact Number</label><input type="tel" name="alt_phone" id="alt_phone" placeholder="Optional alternate number" /></div>
+      <div><label for="email">Email Address</label><input type="email" required name="email" id="email" placeholder="example@email.com" /></div>
+      <div><label for="address">Full Delivery Address</label><textarea required name="address" id="address" rows="3" placeholder="Complete address with area, landmark, etc."></textarea></div>
+      <div><label for="pincode">Pin Code</label><input type="text" required name="pincode" id="pincode" pattern="[0-9]{6}" placeholder="6-digit PIN" /></div>
+      <div><label for="flatname">House / Flat / PG Name</label><input type="text" required name="flatname" id="flatname" placeholder="e.g., Green Residency, PG Elite" /></div>
       <div>
         <label for="slot">Preferred Delivery Time Slot</label>
         <select required name="slot" id="slot">
@@ -199,7 +191,6 @@
           <option value="3-5">3:00 PM - 5:00 PM</option>
         </select>
       </div>
-
       <div>
         <label for="payment_mode">Mode of Payment</label>
         <select required name="payment_mode" id="payment_mode">
@@ -209,42 +200,49 @@
         </select>
       </div>
 
-   <div id="upi-details" class="hidden">
-  <label>Scan & Pay</label>
-  <img src="your-upi-qr-code.png" alt="UPI QR" style="width: 160px; margin-bottom: 10px;" />
-  <div style="margin-top: 0.5rem;">
-    <span><strong>UPI ID:</strong> UPI ID: 9365294816@okbizaxis</span>
-    <span class="copy-icon" onclick="copyUPI()" style="margin-left: 8px;">📋</span>
-  </div>
-</div>
+      <div id="upi-details" class="hidden">
+        <label>Scan & Pay</label>
+        <img src="your-upi-qr-code.png" alt="UPI QR" style="width: 160px; margin-bottom: 10px;" />
+        <div style="margin-top: 0.5rem;">
+          <span><strong>UPI ID:</strong> 9365294816@okbizaxis</span>
+          <span class="copy-icon" onclick="copyUPI()" style="margin-left: 8px; cursor: pointer;">📋</span>
+        </div>
+      </div>
 
       <div id="bank-details" class="hidden" style="margin-top: 1rem;">
-  <label>Bank Transfer Details</label>
-  <div style="line-height: 1.7;">
-    <div><strong>Account Name:</strong> ZustMeal Services</div>
-    <div><strong>Account Number:</strong> 1234567890</div>
-    <div><strong>IFSC:</strong> HDFC0001234</div>
-    <div><strong>Bank Name:</strong> HDFC Bank</div>
-  </div>
-</div>
-
-      <div>
-        <label for="transaction_id">Transaction ID</label>
-        <input type="text" required name="transaction_id" id="transaction_id" placeholder="Enter Transaction Reference" />
+        <label>Bank Transfer Details</label>
+        <div><strong>Account Name:</strong> ZustMeal Services</div>
+        <div><strong>Account Number:</strong> 1234567890</div>
+        <div><strong>IFSC:</strong> HDFC0001234</div>
+        <div><strong>Bank Name:</strong> HDFC Bank</div>
       </div>
+
+      <div><label for="transaction_id">Transaction ID</label><input type="text" required name="transaction_id" id="transaction_id" placeholder="Enter Transaction Reference" /></div>
 
       <div id="referral-group" class="hidden">
         <label for="referral">Referral ID (Optional)</label>
         <input type="text" name="referral" id="referral" placeholder="e.g. ZUST30" />
       </div>
 
-      <button type="submit" style="padding: 0.4rem 0.4rem; font-size: 1rem;">Submit My Meal Plan</button>
+      <button type="submit">Submit My Meal Plan</button>
     </form>
   </main>
 
   <footer>
     <p>© 2025 ZustMeal. Made with ❤️ for your hunger.</p>
   </footer>
+
+  <!-- Modal -->
+  <div id="status-modal" class="hidden">
+    <div class="modal-content">
+      <div class="spinner" id="modal-spinner"></div>
+      <p id="modal-message">Processing your request...</p>
+    </div>
+  </div>
+
+  <!-- Audio Elements -->
+  <audio id="audio-success" src="success-beep.mp3" preload="auto"></audio>
+  <audio id="audio-error" src="error-buzz.mp3" preload="auto"></audio>
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
@@ -255,11 +253,15 @@
     const upiDetails = document.getElementById('upi-details');
     const bankDetails = document.getElementById('bank-details');
 
+    const modal = document.getElementById('status-modal');
+    const message = document.getElementById('modal-message');
+    const spinner = document.getElementById('modal-spinner');
+    const audioSuccess = document.getElementById('audio-success');
+    const audioError = document.getElementById('audio-error');
+
     if (plan) {
       selectedPlanInput.value = plan;
-      if (plan === 'trial') {
-        referralGroup.classList.remove('hidden');
-      }
+      if (plan === 'trial') referralGroup.classList.remove('hidden');
     } else {
       alert("No plan selected. Please go back and choose a plan.");
       document.getElementById('plan-form').classList.add('hidden');
@@ -278,18 +280,19 @@
     });
 
     function copyUPI() {
-      const upiId = "yourupi@bank";
-      navigator.clipboard.writeText(upiId)
+      navigator.clipboard.writeText("9365294816@okbizaxis")
         .then(() => alert("✅ UPI ID copied!"))
         .catch(() => alert("❌ Failed to copy."));
     }
 
     document.getElementById('plan-form').addEventListener('submit', function (e) {
       e.preventDefault();
+      modal.classList.remove('hidden');
+      spinner.style.display = 'block';
+      message.textContent = "Submitting your plan...";
 
       const form = e.target;
       const data = new URLSearchParams();
-
       data.append("Date", new Date().toLocaleString());
       data.append("Full Name", form.name.value);
       data.append("Contact Number", form.phone.value);
@@ -305,25 +308,33 @@
 
       fetch("https://script.google.com/macros/s/AKfycbweGis6lRGqBzfHToT44_9tKzFw1xsQ4gzEmcDMR8Pk7GHyirlrFtP2Tn3y6tYfT2uU/exec", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: data.toString()
       })
       .then(res => res.json())
       .then(response => {
+        spinner.style.display = 'none';
         if (response.result === "success") {
-          alert("✅ Form submitted successfully!");
+          message.textContent = "✅ Meal Plan submitted successfully!";
+          audioSuccess.play();
+          navigator.vibrate?.(200);
           form.reset();
           upiDetails.classList.add('hidden');
           bankDetails.classList.add('hidden');
         } else {
-          alert("❌ Something went wrong: " + response.error);
+          message.textContent = "❌ Submission failed: " + response.error;
+          audioError.play();
+          navigator.vibrate?.([100, 50, 100]);
         }
+        setTimeout(() => modal.classList.add('hidden'), 3000);
       })
       .catch(error => {
-        alert("🚨 Network error. Please try again later.");
+        spinner.style.display = 'none';
+        message.textContent = "🚨 Network error. Please try again.";
+        audioError.play();
+        navigator.vibrate?.([100, 50, 100]);
         console.error("Error:", error);
+        setTimeout(() => modal.classList.add('hidden'), 3000);
       });
     });
   </script>
