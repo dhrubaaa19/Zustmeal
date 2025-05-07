@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ZustMeal Plan Form</title>
+  <title>ZustMeal User Details</title>
   <style>
     :root {
       --yellow: rgb(255, 200, 45);
@@ -84,27 +84,20 @@
     }
 
     button {
-  padding: 0.2rem 1.05rem;
-  background-color: var(--red);
-  color: white;
-  border: none;
-  border-radius: 30px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 100%; /* Makes the button full width on smaller screens */
-  max-width: 210px; /* Ensures it doesn't get too wide on larger screens */
-  margin: 0 auto; /* Centers the button horizontally */
-  display: block;
-}
-
-@media (max-width: 600px) {
-  button {
-    width: 65%; /* Slightly reduce width for mobile */
-  }
-}
-
+      padding: 0.2rem 1.05rem;
+      background-color: var(--red);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      max-width: 210px;
+      margin: 0 auto;
+      display: block;
+    }
 
     button:hover {
       background-color: #b02018;
@@ -114,6 +107,23 @@
       display: none;
     }
 
+    .copy-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fefefe;
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      border: 1px solid #ccc;
+    }
+
+    .copy-icon {
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--red);
+      user-select: none;
+    }
+
     footer {
       text-align: center;
       padding: 1.5rem;
@@ -121,6 +131,12 @@
       color: var(--text-dark);
       font-size: 0.9rem;
       margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      button {
+        width: 65%;
+      }
     }
 
     @media (min-width: 600px) {
@@ -157,7 +173,7 @@
 
       <div>
         <label for="email">Email Address</label>
-        <input type="email" name="email" id="email" placeholder="example@email.com" />
+        <input type="email" required name="email" id="email" placeholder="example@email.com" />
       </div>
 
       <div>
@@ -193,6 +209,25 @@
         </select>
       </div>
 
+   <div id="upi-details" class="hidden">
+  <label>Scan & Pay</label>
+  <img src="your-upi-qr-code.png" alt="UPI QR" style="width: 160px; margin-bottom: 10px;" />
+  <div style="margin-top: 0.5rem;">
+    <span><strong>UPI ID:</strong> UPI ID: 9365294816@okbizaxis</span>
+    <span class="copy-icon" onclick="copyUPI()" style="margin-left: 8px;">📋</span>
+  </div>
+</div>
+
+      <div id="bank-details" class="hidden" style="margin-top: 1rem;">
+  <label>Bank Transfer Details</label>
+  <div style="line-height: 1.7;">
+    <div><strong>Account Name:</strong> ZustMeal Services</div>
+    <div><strong>Account Number:</strong> 1234567890</div>
+    <div><strong>IFSC:</strong> HDFC0001234</div>
+    <div><strong>Bank Name:</strong> HDFC Bank</div>
+  </div>
+</div>
+
       <div>
         <label for="transaction_id">Transaction ID</label>
         <input type="text" required name="transaction_id" id="transaction_id" placeholder="Enter Transaction Reference" />
@@ -203,7 +238,7 @@
         <input type="text" name="referral" id="referral" placeholder="e.g. ZUST30" />
       </div>
 
-      <button type="submit">Submit My Meal Plan</button>
+      <button type="submit" style="padding: 0.4rem 0.4rem; font-size: 1rem;">Submit My Meal Plan</button>
     </form>
   </main>
 
@@ -212,69 +247,85 @@
   </footer>
 
   <script>
-  const urlParams = new URLSearchParams(window.location.search);
-  const plan = urlParams.get('plan');
-  const selectedPlanInput = document.getElementById('selected-plan');
-  const referralGroup = document.getElementById('referral-group');
+    const urlParams = new URLSearchParams(window.location.search);
+    const plan = urlParams.get('plan');
+    const selectedPlanInput = document.getElementById('selected-plan');
+    const referralGroup = document.getElementById('referral-group');
+    const paymentSelect = document.getElementById('payment_mode');
+    const upiDetails = document.getElementById('upi-details');
+    const bankDetails = document.getElementById('bank-details');
 
-  if (plan) {
-    selectedPlanInput.value = plan;
-    if (plan === 'trial') {
-      referralGroup.classList.remove('hidden');
-    }
-  } else {
-    alert("No plan selected. Please go back and choose a plan.");
-    document.getElementById('plan-form').classList.add('hidden');
-  }
-
-  window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-      document.getElementById('name').scrollIntoView({ behavior: 'smooth' });
-    }, 300);
-  });
-
-  document.getElementById('plan-form').addEventListener('submit', function (e) {
-  e.preventDefault();
-
-  const form = e.target;
-  const data = new URLSearchParams();
-
-  data.append("Date", new Date().toLocaleString());
-  data.append("Full Name", form.name.value);
-  data.append("Contact Number", form.phone.value);
-  data.append("Alternate Contact Number", form.alt_phone.value);
-  data.append("Email Address", form.email.value);
-  data.append("Full Delivery Address", form.address.value);
-  data.append("Pin Code", form.pincode.value);
-  data.append("House/Flat/PG Name", form.flatname.value);
-  data.append("Delivery Time Slot", form.slot.value);
-  data.append("Payment Mode", form.payment_mode.value);
-  data.append("Transaction ID", form.transaction_id.value);
-  data.append("Referral ID", form.referral.value || "");
-
-  fetch("https://script.google.com/macros/s/AKfycbweGis6lRGqBzfHToT44_9tKzFw1xsQ4gzEmcDMR8Pk7GHyirlrFtP2Tn3y6tYfT2uU/exec", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    body: data.toString()
-  })
-
-    .then(res => res.json())
-    .then(response => {
-      if (response.result === "success") {
-        alert("✅ Form submitted successfully!");
-        form.reset();
-      } else {
-        alert("❌ Something went wrong: " + response.error);
+    if (plan) {
+      selectedPlanInput.value = plan;
+      if (plan === 'trial') {
+        referralGroup.classList.remove('hidden');
       }
-    })
-    .catch(error => {
-      alert("🚨 Network error. Please try again later.");
-      console.error("Error:", error);
-    });
-  });
-</script>
+    } else {
+      alert("No plan selected. Please go back and choose a plan.");
+      document.getElementById('plan-form').classList.add('hidden');
+    }
 
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.getElementById('name').scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    });
+
+    paymentSelect.addEventListener('change', () => {
+      const value = paymentSelect.value;
+      upiDetails.classList.toggle('hidden', value !== 'upi');
+      bankDetails.classList.toggle('hidden', value !== 'bank');
+    });
+
+    function copyUPI() {
+      const upiId = "yourupi@bank";
+      navigator.clipboard.writeText(upiId)
+        .then(() => alert("✅ UPI ID copied!"))
+        .catch(() => alert("❌ Failed to copy."));
+    }
+
+    document.getElementById('plan-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const data = new URLSearchParams();
+
+      data.append("Date", new Date().toLocaleString());
+      data.append("Full Name", form.name.value);
+      data.append("Contact Number", form.phone.value);
+      data.append("Alternate Contact Number", form.alt_phone.value);
+      data.append("Email Address", form.email.value);
+      data.append("Full Delivery Address", form.address.value);
+      data.append("Pin Code", form.pincode.value);
+      data.append("House/Flat/PG Name", form.flatname.value);
+      data.append("Delivery Time Slot", form.slot.value);
+      data.append("Payment Mode", form.payment_mode.value);
+      data.append("Transaction ID", form.transaction_id.value);
+      data.append("Referral ID", form.referral.value || "");
+
+      fetch("https://script.google.com/macros/s/AKfycbweGis6lRGqBzfHToT44_9tKzFw1xsQ4gzEmcDMR8Pk7GHyirlrFtP2Tn3y6tYfT2uU/exec", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: data.toString()
+      })
+      .then(res => res.json())
+      .then(response => {
+        if (response.result === "success") {
+          alert("✅ Form submitted successfully!");
+          form.reset();
+          upiDetails.classList.add('hidden');
+          bankDetails.classList.add('hidden');
+        } else {
+          alert("❌ Something went wrong: " + response.error);
+        }
+      })
+      .catch(error => {
+        alert("🚨 Network error. Please try again later.");
+        console.error("Error:", error);
+      });
+    });
+  </script>
 </body>
 </html>
