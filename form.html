@@ -362,7 +362,7 @@
       popup.style.display = 'none';
     });
 
-    document.getElementById('plan-form').addEventListener('submit', function (e) {
+        document.getElementById('plan-form').addEventListener('submit', function (e) {
       e.preventDefault();
 
       popup.style.display = 'flex';
@@ -399,12 +399,20 @@
         if (response.result === "success") {
           message.textContent = '✅ Form submitted successfully!';
           message.className = 'popup-message success';
+          // Trigger vibration on successful form submission
+          if ("vibrate" in navigator) {
+            navigator.vibrate(200); // Vibrate for 200ms
+          }
           form.reset();
           upiDetails.classList.add('hidden');
           bankDetails.classList.add('hidden');
         } else {
           message.textContent = '❌ ' + (response.error || 'Something went wrong.');
           message.className = 'popup-message error';
+          // Trigger vibration on error
+          if ("vibrate" in navigator) {
+            navigator.vibrate([100, 50, 100]); // Pattern: vibrate for 100ms, pause 50ms, vibrate for 100ms
+          }
         }
       })
       .catch(error => {
@@ -412,8 +420,31 @@
         message.textContent = '🚨 Network error. Please try again.';
         message.className = 'popup-message error';
         console.error("Error:", error);
+        // Trigger vibration on error
+        if ("vibrate" in navigator) {
+          navigator.vibrate([100, 50, 100]); // Pattern: vibrate for 100ms, pause 50ms, vibrate for 100ms
+        }
       });
     });
+
+    function copyUPI() {
+      const upiId = "9365294816@okbizaxis";
+      navigator.clipboard.writeText(upiId)
+        .then(() => {
+          alert("✅ UPI ID copied!");
+          // Trigger vibration when UPI ID is copied
+          if ("vibrate" in navigator) {
+            navigator.vibrate(100); // Vibrate for 100ms
+          }
+        })
+        .catch(() => {
+          alert("❌ Failed to copy.");
+          // Trigger vibration on error while copying
+          if ("vibrate" in navigator) {
+            navigator.vibrate([100, 50, 100]); // Pattern: vibrate for 100ms, pause 50ms, vibrate for 100ms
+          }
+        });
+    }
   </script>
 </body>
 </html> 
