@@ -84,12 +84,12 @@
     }
 
     button {
-      padding: 0.2rem 1.05rem;
+      padding: 0.4rem 0.4rem;
       background-color: var(--red);
       color: white;
       border: none;
       border-radius: 30px;
-      font-size: 0.8rem;
+      font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.3s ease;
@@ -107,21 +107,63 @@
       display: none;
     }
 
-    .copy-container {
+    .popup-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
       display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 10px;
-      background: #fefefe;
-      padding: 0.75rem 1rem;
-      border-radius: 0.75rem;
-      border: 1px solid #ccc;
+      z-index: 9999;
     }
 
-    .copy-icon {
-      cursor: pointer;
+    .popup-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      max-width: 320px;
+      width: 90%;
+    }
+
+    .spinner {
+      border: 5px solid #eee;
+      border-top: 5px solid var(--red);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 1rem;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .popup-message {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .popup-message.success {
+      color: green;
+    }
+
+    .popup-message.error {
+      color: red;
+    }
+
+    .popup-close {
+      background: var(--red);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
       font-weight: bold;
-      color: var(--red);
-      user-select: none;
+      cursor: pointer;
     }
 
     footer {
@@ -144,6 +186,24 @@
         max-width: 520px;
       }
     }
+
+     @keyframes successFadeIn {
+  0% {
+    transform: scale(0.9) translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.popup-message.success {
+  color: green;
+  animation: successFadeIn 0.6s ease-out;
+}
+
+
   </style>
 </head>
 <body>
@@ -209,24 +269,24 @@
         </select>
       </div>
 
-   <div id="upi-details" class="hidden">
-  <label>Scan & Pay</label>
-  <img src="your-upi-qr-code.png" alt="UPI QR" style="width: 160px; margin-bottom: 10px;" />
-  <div style="margin-top: 0.5rem;">
-    <span><strong>UPI ID:</strong> UPI ID: 9365294816@okbizaxis</span>
-    <span class="copy-icon" onclick="copyUPI()" style="margin-left: 8px;">📋</span>
-  </div>
-</div>
+      <div id="upi-details" class="hidden">
+        <label>Scan & Pay</label>
+        <img src="your-upi-qr-code.png" alt="UPI QR" style="width: 160px; margin-bottom: 10px;" />
+        <div style="margin-top: 0.5rem;">
+          <span><strong>UPI ID:</strong> 9365294816@okbizaxis</span>
+          <span class="copy-icon" onclick="copyUPI()" style="margin-left: 8px; cursor:pointer;">📋</span>
+        </div>
+      </div>
 
       <div id="bank-details" class="hidden" style="margin-top: 1rem;">
-  <label>Bank Transfer Details</label>
-  <div style="line-height: 1.7;">
-    <div><strong>Account Name:</strong> ZustMeal Services</div>
-    <div><strong>Account Number:</strong> 1234567890</div>
-    <div><strong>IFSC:</strong> HDFC0001234</div>
-    <div><strong>Bank Name:</strong> HDFC Bank</div>
-  </div>
-</div>
+        <label>Bank Transfer Details</label>
+        <div style="line-height: 1.7;">
+          <div><strong>Account Name:</strong> ZustMeal Services</div>
+          <div><strong>Account Number:</strong> 1234567890</div>
+          <div><strong>IFSC:</strong> HDFC0001234</div>
+          <div><strong>Bank Name:</strong> HDFC Bank</div>
+        </div>
+      </div>
 
       <div>
         <label for="transaction_id">Transaction ID</label>
@@ -238,13 +298,22 @@
         <input type="text" name="referral" id="referral" placeholder="e.g. ZUST30" />
       </div>
 
-      <button type="submit" style="padding: 0.4rem 0.4rem; font-size: 1rem;">Submit My Meal Plan</button>
+      <button type="submit">Submit My Meal Plan</button>
     </form>
   </main>
 
   <footer>
     <p>© 2025 ZustMeal. Made with ❤️ for your hunger.</p>
   </footer>
+
+  <!-- POPUP HTML -->
+  <div id="popup" style="display: none;" class="popup-overlay">
+    <div class="popup-box">
+      <div id="popupSpinner" class="spinner"></div>
+      <p id="popupMessage" class="popup-message">Processing...</p>
+      <button id="popupClose" class="popup-close">Close</button>
+    </div>
+  </div>
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
@@ -254,6 +323,11 @@
     const paymentSelect = document.getElementById('payment_mode');
     const upiDetails = document.getElementById('upi-details');
     const bankDetails = document.getElementById('bank-details');
+
+    const popup = document.getElementById('popup');
+    const spinner = document.getElementById('popupSpinner');
+    const message = document.getElementById('popupMessage');
+    const popupClose = document.getElementById('popupClose');
 
     if (plan) {
       selectedPlanInput.value = plan;
@@ -278,14 +352,23 @@
     });
 
     function copyUPI() {
-      const upiId = "yourupi@bank";
+      const upiId = "9365294816@okbizaxis";
       navigator.clipboard.writeText(upiId)
         .then(() => alert("✅ UPI ID copied!"))
         .catch(() => alert("❌ Failed to copy."));
     }
 
+    popupClose.addEventListener('click', () => {
+      popup.style.display = 'none';
+    });
+
     document.getElementById('plan-form').addEventListener('submit', function (e) {
       e.preventDefault();
+
+      popup.style.display = 'flex';
+      spinner.style.display = 'block';
+      message.textContent = 'Processing...';
+      message.className = 'popup-message';
 
       const form = e.target;
       const data = new URLSearchParams();
@@ -312,20 +395,25 @@
       })
       .then(res => res.json())
       .then(response => {
+        spinner.style.display = 'none';
         if (response.result === "success") {
-          alert("✅ Form submitted successfully!");
+          message.textContent = '✅ Form submitted successfully!';
+          message.className = 'popup-message success';
           form.reset();
           upiDetails.classList.add('hidden');
           bankDetails.classList.add('hidden');
         } else {
-          alert("❌ Something went wrong: " + response.error);
+          message.textContent = '❌ ' + (response.error || 'Something went wrong.');
+          message.className = 'popup-message error';
         }
       })
       .catch(error => {
-        alert("🚨 Network error. Please try again later.");
+        spinner.style.display = 'none';
+        message.textContent = '🚨 Network error. Please try again.';
+        message.className = 'popup-message error';
         console.error("Error:", error);
       });
     });
   </script>
 </body>
-</html>
+</html> 
