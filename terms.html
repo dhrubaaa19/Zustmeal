@@ -26,12 +26,32 @@
       padding: 1.5rem;
       text-align: center;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
     }
 
     header h1 {
       color: var(--red);
       margin: 0;
       font-size: 2rem;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--red);
+      color: white;
+      border: none;
+      font-size: 1.2rem;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .close-btn:hover {
+      background: #a3140f;
     }
 
     main {
@@ -43,13 +63,9 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 
-    h2, h3 {
+    h2 {
       color: var(--red);
       margin-top: 2rem;
-    }
-
-    h3 {
-      margin-bottom: 0.5rem;
     }
 
     p {
@@ -68,14 +84,6 @@
       font-size: 0.9rem;
     }
 
-    .back-link {
-      display: inline-block;
-      margin-top: 2rem;
-      text-decoration: none;
-      color: var(--red);
-      font-weight: bold;
-    }
-
     @media screen and (max-width: 600px) {
       main {
         margin: 1rem;
@@ -87,6 +95,7 @@
 <body>
   <header>
     <h1>Terms & Conditions</h1>
+    <button class="close-btn" onclick="window.location.href='form.html'">×</button>
   </header>
 
   <main>
@@ -98,68 +107,74 @@
     <p>ZustMeal is a subscription-based tiffin service delivering hygienic, home-cooked meals to students and professionals in Guwahati. We aim to provide consistent, quality food through well-managed logistics and a customer-first approach.</p>
 
     <h2>2. Subscription Plans</h2>
-    <p><strong>a. 3-Days Trial Plan:</strong> Specially discounted for first-time users to experience our service over three consecutive days.</p>
-    <p><strong>b. Mid-Month Magic – 13 Days:</strong> A flexible 13-day plan (excluding Sundays) designed for mid-month coverage.</p>
-    <p><strong>c. Monthly Munchies – 26 Days:</strong> A full-coverage plan for 26 days a month (excluding Sundays) for maximum reliability.</p>
+    <ul>
+      <li><strong>3-Days Trial Plan:</strong> A specially discounted plan for first-time users to experience ZustMeal’s quality over three consecutive days.</li>
+      <li><strong>Mid-Month Magic – 13 Days:</strong> A flexible 13-day plan (excluding Sundays), ideal for mid-month users seeking convenience.</li>
+      <li><strong>Monthly Munchies – 26 Days:</strong> Our most comprehensive plan, covering 26 meals per month (excluding Sundays).</li>
+    </ul>
 
     <h2>3. Pricing & Payments</h2>
     <ul>
-      <li>Prices include applicable taxes unless otherwise mentioned.</li>
-      <li>Accepted payment methods: UPI and Bank Transfers.</li>
-      <li>All plans are prepaid.</li>
-      <li>No refunds or partial refunds unless there is a proven service failure.</li>
+      <li>All prices are inclusive of applicable taxes unless otherwise stated.</li>
+      <li>Accepted payments: UPI and Bank Transfers.</li>
+      <li>All plans are prepaid; refunds are not available except in proven service failures.</li>
     </ul>
 
     <h2>4. Tiffin Box Policy</h2>
     <ul>
-      <li>Each customer receives two stainless steel boxes in a daily rotation.</li>
+      <li>Each customer receives two stainless steel boxes in rotation.</li>
       <li>No security deposit required.</li>
-      <li>₹449 penalty for lost or damaged boxes.</li>
-      <li>Return boxes with your next meal delivery.</li>
-      <li>Failure to return may result in paused services.</li>
+      <li>Loss/damage penalty: ₹449 per box.</li>
+      <li>Non-return may result in service pause.</li>
     </ul>
 
     <h2>5. Delivery Policy</h2>
-    <p>Deliveries are made in batches (1 PM / 2 PM / 3 PM). You must be present to collect and return boxes. ZustMeal is not liable for delays caused by weather, traffic, or force majeure events.</p>
+    <ul>
+      <li>Deliveries are done zone-wise (1 PM / 2 PM / 3 PM).</li>
+      <li>Customers must be present to receive and return boxes.</li>
+      <li>ZustMeal is not liable for delays due to external factors.</li>
+    </ul>
 
     <h2>6. Cancellations & Modifications</h2>
     <ul>
-      <li>Modify/cancel up to 1 hour before scheduled delivery.</li>
-      <li>Plans can’t be paused or extended, except for:</li>
-      <ul>
-        <li>Hospitalization (medical proof required)</li>
-        <li>Temporary relocation/travel (proof required)</li>
-        <li>ZustMeal-caused disruptions</li>
-      </ul>
+      <li>Changes allowed up to 1 hour before delivery.</li>
+      <li>Plans can't be paused/extended, except for:
+        <ul>
+          <li>Hospitalization (medical proof required)</li>
+          <li>Temporary relocation/travel (proof required)</li>
+          <li>ZustMeal service disruptions</li>
+        </ul>
+      </li>
     </ul>
 
     <h2>7. Food Allergies & Preferences</h2>
-    <p>Food is prepared in shared kitchens; cross-contamination may occur. Please review ingredients or contact us before placing orders. ZustMeal is not liable for allergic reactions or related health issues.</p>
+    <p>Meals are prepared in shared kitchens. Cross-contamination is possible. ZustMeal is not liable for allergic reactions. Please inquire if you have specific concerns.</p>
 
     <h2>8. Customer Conduct</h2>
     <ul>
-      <li>Misconduct or abuse toward staff will result in service suspension.</li>
-      <li>Referral fraud (e.g., same phone/address/payment info) leads to a permanent ban.</li>
+      <li>Abusive behavior leads to immediate service suspension.</li>
+      <li>Referral abuse results in permanent account ban.</li>
     </ul>
 
     <h2>9. Referral Program</h2>
-    <p>Referrals are rewarded when a referred customer places their first order. ZustMeal reserves the right to reject fraudulent referrals.</p>
+    <ul>
+      <li>Valid only when referred user registers and orders.</li>
+      <li>ZustMeal may withhold rewards if fraud is detected (e.g., duplicate phone/address/payment).</li>
+    </ul>
 
     <h2>10. Data Privacy</h2>
-    <p>We securely store customer data and use it only for service and communication. We do not share data without your consent.</p>
+    <p>Data is used only for service and not shared with third parties without consent. See our <a href="privacy.html">Privacy Policy</a> for details.</p>
 
     <h2>11. Amendments</h2>
-    <p>Terms may change anytime without notice. Continued service use means acceptance of new terms.</p>
+    <p>Terms may be updated without prior notice. Continued use implies agreement with revised terms.</p>
 
     <h2>12. Contact Information</h2>
-    <p>📧 Email: <a href="mailto:zustmeal@gmail.com">zustmeal@gmail.com</a><br/>
-       📞 Phone/WhatsApp: <a href="tel:+919365294816">+91 93652 94816</a></p>
-
-    <a class="back-link" href="/">← Back to Home</a>
+    <p>Email: <a href="mailto:zustmeal@gmail.com">zustmeal@gmail.com</a><br/>
+       Phone/WhatsApp: <a href="tel:+919365294816">+91 93652 94816</a></p>
   </main>
 
   <footer>
-    <p>© 2025 ZustMeal. Built with purpose. Served with care.</p>
+    <p>© 2025 ZustMeal. Made with ❤️ for your hunger.</p>
   </footer>
 </body>
-</html>
+</html> 
