@@ -26,12 +26,32 @@
       padding: 1.5rem;
       text-align: center;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
     }
 
     header h1 {
       color: var(--red);
       margin: 0;
       font-size: 2rem;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--red);
+      color: white;
+      border: none;
+      font-size: 1.2rem;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .close-btn:hover {
+      background: #a3140f;
     }
 
     main {
@@ -64,14 +84,6 @@
       font-size: 0.9rem;
     }
 
-    .back-link {
-      display: inline-block;
-      margin-top: 2rem;
-      text-decoration: none;
-      color: var(--red);
-      font-weight: bold;
-    }
-
     @media screen and (max-width: 600px) {
       main {
         margin: 1rem;
@@ -83,6 +95,7 @@
 <body>
   <header>
     <h1>Privacy Policy</h1>
+    <button class="close-btn" onclick="window.location.href='form.html'">×</button>
   </header>
 
   <main>
@@ -133,8 +146,6 @@
     <p>For questions about this policy or to make a data request:</p>
     <p>📧 Email: <a href="mailto:zustmeal@gmail.com">zustmeal@gmail.com</a><br/>
        📞 Phone/WhatsApp: <a href="tel:+919365294816">+91 93652 94816</a></p>
-
-    <a class="back-link" href="/">← Back to Home</a>
   </main>
 
   <footer>
