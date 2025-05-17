@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu - ZustMeal</title>
+  <style>
+    :root {
+      --yellow: rgb(255, 200, 45);
+      --red: rgb(220, 40, 30);
+      --text-dark: #000000;
+      --light-bg: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--yellow);
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      color: var(--red);
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .week-switcher {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--light-bg);
+      padding: 1rem;
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: var(--red);
+    }
+
+    .week-switcher button {
+      background: #fff;
+      border: 2px solid var(--red);
+      color: var(--red);
+      font-size: 18px;
+      font-weight: bold;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: background 0.2s, color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 10px;
+    }
+
+    .week-switcher button:hover {
+      background-color: var(--red);
+      color: #fff;
+    }
+
+    .day-section {
+      background-color: var(--yellow);
+      border-radius: 8px;
+      margin: 10px 15px;
+      padding: 15px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .day-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    .meal-header {
+      display: flex;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .lunch,
+    .dinner {
+      flex: 1;
+      padding: 8px;
+      text-align: center;
+      background-color: #fff5d6;
+      color: var(--text-dark);
+      transition: background 0.3s, color 0.3s;
+      font-size: 0.95rem;
+    }
+
+    .lunch.active,
+    .dinner.active {
+      background-color: var(--red);
+      color: white;
+    }
+
+    .meal-content {
+      background-color: #ffffff;
+      margin-top: 5px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .meal-content ul {
+      margin: 0;
+      padding-left: 20px;
+      list-style-type: disc;
+    }
+
+    .meal-content li {
+      margin: 5px 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: var(--yellow);
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+    }
+
+    @media screen and (max-width: 600px) {
+      .week-switcher {
+        font-size: 1rem;
+      }
+
+      .week-switcher button {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+        margin: 0 8px;
+      }
+
+      .day-title {
+        font-size: 1rem;
+      }
+
+      .lunch,
+      .dinner {
+        font-size: 0.85rem;
+        padding: 6px;
+      }
+
+      .meal-content {
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Menu</h1>
+  </header>
+
+  <div class="week-switcher">
+    <button id="prevWeek">&lt;</button>
+    <span id="weekTitle">Week1</span>
+    <button id="nextWeek">&gt;</button>
+  </div>
+
+  <div id="menuContainer"></div>
+
+  <footer>
+    <p>© 2025 ZustMeal. Made with ❤️ for your hunger.</p>
+  </footer>
+
+ <script>
+  const menuData = {
+    Week1: {
+      Monday: { lunch: ["Rice", "Dal", "Salad"], dinner: ["Roti", "Chole", "Kheer"] },
+      Tuesday: { lunch: ["Pulao", "Curd", "Aloo"], dinner: ["Paratha", "Bhindi", "Soup"] },
+      Wednesday: { lunch: ["Khichdi", "Papad", "Pickle"], dinner: ["Dosa", "Sambar", "Coconut Chutney"] },
+      Thursday: { lunch: ["Poori", "Aloo Sabzi", "Chutney"], dinner: ["Rice", "Rajma", "Onion Salad"] },
+      Friday: { lunch: ["Jeera Rice", "Paneer Curry"], dinner: ["Veg Biryani", "Boondi Raita"] },
+      Saturday: { lunch: ["Noodles", "Manchurian"], dinner: ["Pizza", "Corn Salad"] }
+    },
+    Week2: {
+      Monday: { lunch: ["Roti", "Mix Veg", "Raita"], dinner: ["Rice", "Dal Makhani", "Fryums"] },
+      Tuesday: { lunch: ["Pasta", "Soup"], dinner: ["Chapati", "Matar Paneer"] },
+      Wednesday: { lunch: ["Fried Rice", "Spring Roll"], dinner: ["Uttapam", "Coconut Chutney"] },
+      Thursday: { lunch: ["Rice", "Kadhi", "Bhindi"], dinner: ["Paratha", "Curd"] },
+      Friday: { lunch: ["Roti", "Rajma"], dinner: ["Rice", "Palak Paneer", "Lassi"] },
+      Saturday: { lunch: ["Sandwich", "Juice"], dinner: ["Chowmein", "Ice Cream"] }
+    },
+    Week3: {
+      Monday: { lunch: ["Chole Bhature", "Salad"], dinner: ["Paneer Wrap", "Sweet"] },
+      Tuesday: { lunch: ["Roti", "Lauki Dal"], dinner: ["Veg Pulav", "Papad"] },
+      Wednesday: { lunch: ["Idli", "Sambar"], dinner: ["Paratha", "Paneer Bhurji"] },
+      Thursday: { lunch: ["Upma", "Coconut Chutney"], dinner: ["Veg Korma", "Rice"] },
+      Friday: { lunch: ["Lemon Rice", "Pickle"], dinner: ["Roti", "Dal Fry", "Salad"] },
+      Saturday: { lunch: ["Pizza", "Lemonade"], dinner: ["Burger", "Fries"] }
+    },
+    Week4: {
+      Monday: { lunch: ["Veg Sandwich", "Milk"], dinner: ["Roti", "Aloo Gobi"] },
+      Tuesday: { lunch: ["Rice", "Green Dal"], dinner: ["Roti", "Mix Veg"] },
+      Wednesday: { lunch: ["Roti", "Pumpkin Curry"], dinner: ["Pasta", "Soup"] },
+      Thursday: { lunch: ["Rice", "Paneer Gravy"], dinner: ["Naan", "Dal Tadka"] },
+      Friday: { lunch: ["Roti", "Beans"], dinner: ["Rice", "Kofta Curry"] },
+      Saturday: { lunch: ["Macaroni", "Salad"], dinner: ["Khichdi", "Curd"] }
+    }
+  };
+
+  let currentWeek = "Week1";
+  const weekOrder = ["Week1", "Week2", "Week3", "Week4"];
+
+  function renderMenu() {
+    const container = document.getElementById("menuContainer");
+    container.innerHTML = "";
+
+    const weekData = menuData[currentWeek];
+    for (const day of ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]) {
+      const meals = weekData[day];
+
+      const daySection = document.createElement("div");
+      daySection.className = "day-section";
+      daySection.id = `section-${day}`;
+
+      const todayName = new Date().toLocaleDateString("en-US", { weekday: "long" });
+      const isToday = todayName === day;
+
+      daySection.innerHTML = `
+        <div class="day-title">${day}${isToday ? ' <span style="color: var(--red); font-weight: normal;">(Today)</span>' : ''}</div>
+        <div class="meal-header" data-day="${day}">
+          <div class="lunch active">Lunch</div>
+          <div class="dinner">Dinner</div>
+        </div>
+        <div class="meal-content" id="meal-${day}">
+          <ul>
+            ${meals.lunch.map(item => `<li>${item}</li>`).join("")}
+          </ul>
+        </div>
+      `;
+
+      container.appendChild(daySection);
+    }
+
+    document.getElementById("weekTitle").textContent = currentWeek;
+
+    // Meal switcher functionality
+    document.querySelectorAll(".meal-header").forEach(header => {
+      header.addEventListener("click", function (e) {
+        const day = this.getAttribute("data-day");
+        const lunchTab = this.querySelector(".lunch");
+        const dinnerTab = this.querySelector(".dinner");
+        const mealDiv = document.getElementById(`meal-${day}`);
+        const isLunch = e.target.classList.contains("lunch");
+
+        lunchTab.classList.toggle("active", isLunch);
+        dinnerTab.classList.toggle("active", !isLunch);
+
+        const mealType = isLunch ? "lunch" : "dinner";
+        const items = menuData[currentWeek][day][mealType];
+
+        mealDiv.innerHTML = `
+          <ul>
+            ${items.map(item => `<li>${item}</li>`).join("")}
+          </ul>
+        `;
+      });
+    });
+
+    // Scroll to today's section if available
+    const todayName = new Date().toLocaleDateString("en-US", { weekday: "long" });
+    if (["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].includes(todayName)) {
+      const todaySection = document.getElementById(`section-${todayName}`);
+      if (todaySection) {
+        todaySection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  }
+
+  document.getElementById("prevWeek").addEventListener("click", () => {
+    const currentIndex = weekOrder.indexOf(currentWeek);
+    currentWeek = weekOrder[(currentIndex - 1 + weekOrder.length) % weekOrder.length];
+    renderMenu();
+  });
+
+  document.getElementById("nextWeek").addEventListener("click", () => {
+    const currentIndex = weekOrder.indexOf(currentWeek);
+    currentWeek = weekOrder[(currentIndex + 1) % weekOrder.length];
+    renderMenu();
+  });
+
+  renderMenu();
+</script>
+
+</body>
+</html>
