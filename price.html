@@ -185,10 +185,11 @@
 
     <!-- Mid-Month Magic -->
     <div class="plan-card">
-      <h2>Mid-Month Magic (15 Days)</h2>
-      <p><strong>₹1599 for 1 meal (Lunch/Dinner) • ₹3099 for both</strong></p>
-      <p>Perfect for office-goers and students who need fresh meals for the mid-month period.</p>
-      <p class="duration">Duration: 15 Days</p>
+      <h2>Monthly Munchies</h2>
+      <p><strong>₹1601 for 1 meal (Lunch/Dinner)</strong></p>
+      <p><strong>₹3101 for both meals (Lunch & Dinner)</strong></p>
+      <p><strong>Your month, made tastier.</strong> Monthly Munchies brings you daily meals crafted for comfort, energy, and pure satisfaction.</p>
+      <p class="duration">Duration: One Month</p>
       <p class="working-days">* 26 working days</p>
       <!-- For Mid-Month Magic -->
 <button onclick="window.location.href='form.html?plan=mid'">Select Plan</button>
@@ -196,26 +197,54 @@
 
     <!-- Monthly Munchies -->
     <div class="plan-card">
-      <h2>Monthly Munchies</h2>
-      <p><strong>₹1599 for 1 meal (Lunch/Dinner) • ₹3099 for both</strong></p>
-      <p>Hassle-free monthly solution for daily eaters who want consistency and value.</p>
-      <p class="duration">Duration: 1 Month</p>
-      <p class="working-days">* 26 working days</p>
+      <h2>Mid-Month Magic</h2>
+      <p>₹<strong>1001 for one meal (Lunch/Dinner)</strong></p>
+      <p>₹<strong>1701 for both meals (Lunch & Dinner)</strong></p>
+      <p><strong>Perfect for the busy half</strong> — Mid-Month Magic brings you half month of tasty meals, just when you need them most.</p>
+      <p class="duration">Duration: Half-Month</p>
+      <p class="working-days">* 13 working days</p>
       <!-- For Monthly Munchies -->
 <button onclick="window.location.href='form.html?plan=monthly'">Select Plan</button>
     </div>
   </main>
-  <!-- WhatsApp Floating Chat -->
-  <a
-    href="https://wa.me/919365294816?text=Hi%20ZustMeal.%20I'm%20new%20in%20the%20city%20and%20interested%20in%20your%20tiffin%20service.%20Can%20you%20please%20share%20the%20menu%20and%20trial%20plan%20details%3F"
-    class="whatsapp-btn"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Chat
-  </a>
+  <!-- Floating Action Button -->
+<div class="fab-container">
+  <div class="fab-options" id="fabOptions">
+    <a href="tel:+919365294816" class="fab-icon">
+      <img src="phone.png" alt="Phone">
+    </a>
+    <a href="https://wa.me/919365294816?text=Hello%20Zustmeal.%20I%E2%80%99m%20new%20in%20the%20city%20and%20interested%20in%20your%20meal%20service%2C%20hoping%20to%20find%20a%20little%20comfort%20and%20care%20in%20every%20bite%20❤️" class="fab-icon">
+  <img src="whatsapp.png" alt="WhatsApp">
+    </a>
+  </div>
+  <button class="fab-button" id="fabButton">
+    <img id="logo" src="your-logo.png" alt="Logo Icon">
+    <img id="close" src="x-logo.png" alt="Close Icon">
+  </button>
+</div>
   <footer>
     <p>© 2025 ZustMeal. Made with ❤️ for your hunger.</p>
   </footer>
+  
+  <script>
+  <!-- Hamburger Icon -->
+     function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const hamburger = document.getElementById('hamburger');
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('show');
+      hamburger.classList.toggle('active');
+    }
+
+  <!-- Floating Button -->
+  const fabButton = document.getElementById("fabButton");
+  const fabOptions = document.getElementById("fabOptions");
+
+  fabButton.addEventListener("click", () => {
+    fabOptions.classList.toggle("show");
+    fabButton.classList.toggle("open");
+  });
+  </script>
 </body>
 </html>
