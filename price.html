@@ -143,24 +143,258 @@
         background-position: 0% 50%;
       }
     }
-        .whatsapp-btn {
+
+    /* Floating Button */
+      body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      height: 200vh;
+    }
+
+    .fab-container {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background-color: #25D366;
-      color: white;
-      padding: 0.75rem 1rem;
-      border-radius: 999px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
       z-index: 999;
     }
 
-    .whatsapp-btn:hover {
-      background-color: #1ebc5a;
+    .fab-options {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(10px) scale(0.95);
+      transition: all 0.3s ease;
+      pointer-events: none;
     }
+
+    .fab-options.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .fab-icon {
+      background: transparent;
+      border: none;
+      padding: 0;
+      margin: 6px 0;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .fab-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .fab-button {
+      width: 30px;
+      height: 30px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .fab-button img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+      transition: opacity 0.1s ease;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .fab-button img#logo {
+      opacity: 1;
+    }
+
+    .fab-button.open img#logo {
+      opacity: 0;
+    }
+
+    .fab-button img#close {
+      opacity: 0;
+    }
+
+    .fab-button.open img#close {
+      opacity: 1;
+    }
+
+    @media (max-width: 480px) {
+      .fab-container {
+        bottom: 12px;
+        right: 12px;
+      }
+
+      .fab-icon,
+      .fab-button,
+      .fab-button img {
+        width: 45px;
+        height: 45px;
+      }
+    }
+    
+/* Sidebar */
+  #sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 60%; /* ↓ reduced from 80% */
+  max-width: 240px; /* ↓ reduced from 300px */
+  height: 100%;
+  background-color: white;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--gap-unit);
+}
+
+    #sidebar.open {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    #sidebar a {
+      color: black;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+
+    .follow-text {
+      font-weight: bold;
+      font-size: 1.3rem;
+      color: black;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 16.3px;
+      align-items: center;
+    }
+
+    .social-icons img {
+      height: 2.5rem;
+      width: auto;
+    }
+
+    /* Hamburger Icon */
+    .hamburger {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1100;
+      cursor: pointer;
+      width: 30px;
+      height: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .bar {
+      height: 3px;
+      width: 100%;
+      background-color: red;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active .bar1 {
+      transform: rotate(48deg) translate(5px, 5px);
+    }
+
+    .hamburger.active .bar2 {
+      opacity: 0;
+    }
+
+    .hamburger.active .bar3 {
+      transform: rotate(-48deg) translate(5px, -5px);
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      display: none;
+    }
+
+    .overlay.show {
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+
+      .hero h2 {
+        font-size: 1rem;
+      }
+
+      .hero button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+      }
+
+      #sidebar {
+        width: 100%;
+        padding: 1.5rem 1rem;
+        gap: 30px;
+      }
+
+      #sidebar a,
+      .follow-text {
+        font-size: 0.95rem;
+      }
+
+      .social-icons img {
+        height: 1.25rem;
+      }
+
+      .hamburger {
+        width: 26px;
+        height: 22px;
+      }
+
+      .bar {
+        height: 3px;
+      }
+    }
+
+    .zust-logo {
+  height: 4.3rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .zust-logo {
+    height: 3.5rem; /* Adjust the size as per your preference */
+  }
+}
+      
   </style>
 </head>
 <body>
@@ -174,20 +408,19 @@
     <div class="rotating-border-wrapper">
       <div class="plan-card">
         <h2>3-Day Trial Plan</h2>
-        <p><strong>₹159 for 3 Meals</strong></p>
+        <p>₹<strong>151 for 3 days</strong></p>
         <p>Perfect for new customers looking to explore our flavors before committing.</p>
-        <p class="duration">Duration: 3 days</p>
-        <p class="working-days">* 3 meals for 3 days</p>
-        <!-- For 3-Day Trial Plan -->
-<button onclick="window.location.href='form.html?plan=trial'">Select Plan</button>
+        <p class="duration">Duration: Trial period</p>
+        <p class="working-days">* 3 days</p>
+        <button onclick="window.location.href='form.html?plan=trial'">Select Plan</button>
       </div>
     </div>
 
     <!-- Mid-Month Magic -->
     <div class="plan-card">
       <h2>Monthly Munchies</h2>
-      <p><strong>₹1601 for 1 meal (Lunch/Dinner)</strong></p>
-      <p><strong>₹3101 for both meals (Lunch & Dinner)</strong></p>
+      <p>₹<strong>1601 for 1 meal (Lunch/Dinner)</strong></p>
+      <p>₹<strong>3101 for both meals (Lunch & Dinner)</strong></p>
       <p><strong>Your month, made tastier.</strong> Monthly Munchies brings you daily meals crafted for comfort, energy, and pure satisfaction.</p>
       <p class="duration">Duration: One Month</p>
       <p class="working-days">* 26 working days</p>
