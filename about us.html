@@ -71,59 +71,337 @@
         padding: 1.5rem;
       }
     }
+    /* Floating Button */
+      body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      height: 200vh;
+    }
+
+    .fab-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+
+    .fab-options {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(10px) scale(0.95);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    .fab-options.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .fab-icon {
+      background: transparent;
+      border: none;
+      padding: 0;
+      margin: 6px 0;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .fab-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .fab-button {
+      width: 30px;
+      height: 30px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .fab-button img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+      transition: opacity 0.1s ease;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .fab-button img#logo {
+      opacity: 1;
+    }
+
+    .fab-button.open img#logo {
+      opacity: 0;
+    }
+
+    .fab-button img#close {
+      opacity: 0;
+    }
+
+    .fab-button.open img#close {
+      opacity: 1;
+    }
+
+    @media (max-width: 480px) {
+      .fab-container {
+        bottom: 12px;
+        right: 12px;
+      }
+
+      .fab-icon,
+      .fab-button,
+      .fab-button img {
+        width: 45px;
+        height: 45px;
+      }
+    }
+    
+/* Sidebar */
+  #sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 60%; /* ↓ reduced from 80% */
+  max-width: 240px; /* ↓ reduced from 300px */
+  height: 100%;
+  background-color: white;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--gap-unit);
+}
+
+    #sidebar.open {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    #sidebar a {
+      color: black;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+
+    .follow-text {
+      font-weight: bold;
+      font-size: 1.3rem;
+      color: black;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 16.3px;
+      align-items: center;
+    }
+
+    .social-icons img {
+      height: 2.5rem;
+      width: auto;
+    }
+
+    /* Hamburger Icon */
+    .hamburger {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1100;
+      cursor: pointer;
+      width: 30px;
+      height: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .bar {
+      height: 3px;
+      width: 100%;
+      background-color: red;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active .bar1 {
+      transform: rotate(48deg) translate(5px, 5px);
+    }
+
+    .hamburger.active .bar2 {
+      opacity: 0;
+    }
+
+    .hamburger.active .bar3 {
+      transform: rotate(-48deg) translate(5px, -5px);
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      display: none;
+    }
+
+    .overlay.show {
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+
+      .hero h2 {
+        font-size: 1rem;
+      }
+
+      .hero button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+      }
+
+      #sidebar {
+        width: 100%;
+        padding: 1.5rem 1rem;
+        gap: 30px;
+      }
+
+      #sidebar a,
+      .follow-text {
+        font-size: 0.95rem;
+      }
+
+      .social-icons img {
+        height: 1.25rem;
+      }
+
+      .hamburger {
+        width: 26px;
+        height: 22px;
+      }
+
+      .bar {
+        height: 3px;
+      }
+    }
+
+    .zust-logo {
+  height: 4.3rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .zust-logo {
+    height: 3.5rem; /* Adjust the size as per your preference */
+  }
+}
   </style>
 </head>
 <body>
   <header>
     <h1>Why ZustMeal?</h1>
   </header>
+   <!-- Hamburger Icon -->
+  <div class="hamburger" onclick="toggleSidebar()" id="hamburger">
+    <div class="bar bar1"></div>
+    <div class="bar bar2"></div>
+    <div class="bar bar3"></div>
+  </div>
 
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <a href="index.html"><li></li>Zustmeal</li></a>
+    <a href="about us.html"><li>Why Zustmeal?</li></a>
+    <a href="Menu.html"><li>Taste Zone</li></a>
+    <a href="price.html"><li>Unlock Meals</li></a>
+    <a href="refer.html"><li>Become a Brand Ambassador</li></a>
+    <div class="follow-text">Let’s vibe on</div>
+    <div class="social-icons">
+      <a href="https://www.instagram.com/zustmeal?igsh=eTh2N2JvajMzMnlv" target="_blank">
+        <img src="instagram.png"/>
+      </a>
+      <a href="https://www.instagram.com/zustmeal?igsh=eTh2N2JvajMzMnlv" target="_blank">
+        <img src="facebook.png"/>
+      </a>
+      <a href="https://www.instagram.com/zustmeal?igsh=eTh2N2JvajMzMnlv" target="_blank">
+        <img src="x.png"/>
+      </a>
+    </div>
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
   <main>
-    <p>🥗 <strong>Why Zustmeal?</strong><br>
     At Zustmeal, we’re redefining the way daily meals are delivered. We know how difficult it can be to find affordable, hygienic, and homely food — especially for students and working professionals living away from home. That’s why we built Zustmeal with one goal: to deliver fresh, healthy, home-cooked meals you can rely on.</p>
 
     <h2>What Makes Zustmeal Different?</h2>
 
-    <p>🍱 <strong>1. Homely, Hygienic Meals</strong><br>
+    <p><strong>1. Homely, Hygienic Meals</strong><br>
     Our meals are prepared in carefully selected home-style kitchens that prioritize hygiene, taste, and nutrition. Each tiffin is cooked just like how you'd make it at home — simple, balanced, and made with love.</p>
 
-    <p>📦 <strong>2. Affordable & Flexible Pricing</strong><br>
+    <p><strong>2. Affordable & Flexible Pricing</strong><br>
     We offer meals starting at just ₹60, making it budget-friendly for college students and working individuals. Want to spice it up? Choose from delicious power pack like Chicken Curry, Paneer Masala, and more — all at pocket-friendly prices.</p>
 
-    <p>⏱️ <strong>3. Timely Deliveries, Every Day</strong><br>
+    <p><strong>3. Timely Deliveries, Every Day</strong><br>
     With our optimized delivery model, we ensure your food reaches you fresh and on time. Meals are prepared and packed in insulated containers and delivered in zoned batches by trained delivery partners.</p>
 
-    <p>🔁 <strong>4. Rotating Weekly Menu</strong><br>
+    <p><strong>4. Rotating Weekly Menu</strong><br>
     We understand variety matters. That’s why we offer a 6-day rotating menu with new sabji and dal options every day — so you never get bored of eating the same food.</p>
 
-    <p>📥 <strong>5. Easy Trials & No Long-Term Lock-in</strong><br>
+    <p><strong>5. Easy Trials & No Long-Term Lock-in</strong><br>
     Not ready for a full subscription? Try our 3-day or 1-week trial to experience our service before committing. No deposits, no pressure.</p>
 
-    <p>🛠️ <strong>6. Transparent Vision (Live Kitchen Coming Soon)</strong><br>
+    <p><strong>6. Transparent Vision (Live Kitchen Coming Soon)</strong><br>
     We’re building a future where you’ll be able to see your food being cooked via live-streaming from our partner kitchens. Full transparency, full peace of mind. It’s not available yet — but it’s coming soon.</p>
 
-    <p>🧠 <strong>Built for Students, Designed for Simplicity</strong><br>
+    <p><strong>Built for Students, Designed for Simplicity</strong><br>
     ZustMeal was created keeping college students and bachelors in mind. We know your routine can be unpredictable — that’s why our system is designed for flexibility. Want to pause meals, change time slots, or customize your food? We’re working to make all of that possible through an app coming soon.</p>
 
-    <h2>📦 Our Core Meal Plan</h2>
-    <p><strong>Basic Meal @ ₹60</strong><br>
+    <h2>Our Core Meal Plan</h2>
+    <p><strong>Basic Meal @ ₹61</strong><br>
     🍚 Rice or Roti<br>
     🥣 Seasonal Sabji<br>
     🫘 Dal</p>
 
-    <p><strong>Power pack (Optional):</strong><br>
-    🍗 Chicken Curry – ₹39<br>
-    🐟 Fish Curry – ₹39<br>
-    🐖 Pork Dry – ₹39<br>
-    🧀 Paneer Masala – ₹29<br>
-    🥚 Masala Omelette – ₹25</p>
+    <p><strong>Power pack (Optional)</strong><br>
+    🍗 Chicken Curry – ₹41<br>
+    🐟 Fish Curry – ₹41<br>
+    🐖 Pork Dry – ₹41<br>
+    🧀 Paneer Masala – ₹31<br>
+    🥚 Masala Omelette – ₹21</p>
 
     <h2>🎯 Our Promise to You</h2>
     <p>We’re not here to run a fancy business. We’re here to build a trust-based meal service that solves your real problem — affordable, hygienic food, every single day.</p>
 
     <p>We’re just getting started — and your feedback helps us improve every step of the way.</p>
 
-   <h2>📞 Want to Try ZustMeal?</h2>
+   <h2>Try Zustmeal now</h2>
 <p>We’d love for you to give it a shot.<br>
 <a href="price.html" style="color: var(--red); text-decoration: underline;">
   Try 3-Day Trial Plan
@@ -133,5 +411,42 @@
   <footer>
     <p>© 2025 ZustMeal. Made with ❤️ for your hunger.</p>
   </footer>
+ <!-- Floating Action Button -->
+<div class="fab-container">
+  <div class="fab-options" id="fabOptions">
+    <a href="tel:+919365294816" class="fab-icon">
+      <img src="phone.png" alt="Phone">
+    </a>
+    <a href="https://wa.me/919365294816?text=Hello%20Zustmeal.%20I%E2%80%99m%20new%20in%20the%20city%20and%20interested%20in%20your%20meal%20service%2C%20hoping%20to%20find%20a%20little%20comfort%20and%20care%20in%20every%20bite%20❤️" class="fab-icon">
+  <img src="whatsapp.png" alt="WhatsApp">
+    </a>
+  </div>
+  <button class="fab-button" id="fabButton">
+    <img id="logo" src="your-logo.png" alt="Logo Icon">
+    <img id="close" src="x-logo.png" alt="Close Icon">
+  </button>
+</div>
+
+  <script>
+  <!-- Hamburger Icon -->
+     function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const hamburger = document.getElementById('hamburger');
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('show');
+      hamburger.classList.toggle('active');
+    }
+
+  <!-- Floating Button -->
+  const fabButton = document.getElementById("fabButton");
+  const fabOptions = document.getElementById("fabOptions");
+
+  fabButton.addEventListener("click", () => {
+    fabOptions.classList.toggle("show");
+    fabButton.classList.toggle("open");
+  });
+  </script>
+  
 </body>
 </html>
