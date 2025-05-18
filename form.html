@@ -223,7 +223,178 @@
   text-decoration: underline;
   font-weight: bold;
 }
+    /* Floating Button */
+      body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      height: 200vh;
+    }
+
+    .fab-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+
+    .fab-options {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(10px) scale(0.95);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    .fab-options.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .fab-icon {
+      background: transparent;
+      border: none;
+      padding: 0;
+      margin: 6px 0;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .fab-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .fab-button {
+      width: 30px;
+      height: 30px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .fab-button img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+      transition: opacity 0.1s ease;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .fab-button img#logo {
+      opacity: 1;
+    }
+
+    .fab-button.open img#logo {
+      opacity: 0;
+    }
+
+    .fab-button img#close {
+      opacity: 0;
+    }
+
+    .fab-button.open img#close {
+      opacity: 1;
+    }
+
+    @media (max-width: 480px) {
+      .fab-container {
+        bottom: 12px;
+        right: 12px;
+      }
+
+      .fab-icon,
+      .fab-button,
+      .fab-button img {
+        width: 45px;
+        height: 45px;
+      }
+    }
     
+/* Sidebar */
+  #sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 60%; /* ↓ reduced from 80% */
+  max-width: 240px; /* ↓ reduced from 300px */
+  height: 100%;
+  background-color: white;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--gap-unit);
+}
+
+    #sidebar.open {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    #sidebar a {
+      color: black;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+
+    .follow-text {
+      font-weight: bold;
+      font-size: 1.3rem;
+      color: black;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 16.3px;
+      align-items: center;
+    }
+
+    .social-icons img {
+      height: 2.5rem;
+      width: auto;
+    }
+
+    /* Hamburger Icon */
+    .hamburger {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1100;
+      cursor: pointer;
+      width: 30px;
+      height: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .bar {
+      height: 3px;
+      width: 100%;
+      background-color: red;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
   </style>
 </head>
 <body>
@@ -334,7 +505,23 @@
   <footer>
     <p>© 2025 ZustMeal. Made with ❤️ for your hunger.</p>
   </footer>
-
+  
+<!-- Floating Action Button -->
+<div class="fab-container">
+  <div class="fab-options" id="fabOptions">
+    <a href="tel:+919365294816" class="fab-icon">
+      <img src="phone.png" alt="Phone">
+    </a>
+    <a href="https://wa.me/919365294816text=Hello%20Zustmeal.%20I’m%20new%20in%20the%20city%20and%20interested%20in%20your%20meal%20service%2C%20hoping%20to%20find%20a%20little%20comfort%20and%20care%20in%20every%20bite%20❤️" class="fab-icon">
+  <img src="whatsapp.png" alt="WhatsApp">
+    </a>
+  </div>
+  <button class="fab-button" id="fabButton">
+    <img id="logo" src="your-logo.png" alt="Logo Icon">
+    <img id="close" src="x-logo.png" alt="Close Icon">
+  </button>
+</div>
+  
   <!-- POPUP HTML -->
   <div id="popup" style="display: none;" class="popup-overlay">
     <div class="popup-box">
@@ -474,6 +661,16 @@
           }
         });
     }
+
+  <!-- Floating Button -->
+  const fabButton = document.getElementById("fabButton");
+  const fabOptions = document.getElementById("fabOptions");
+
+  fabButton.addEventListener("click", () => {
+    fabOptions.classList.toggle("show");
+    fabButton.classList.toggle("open");
+  });
+
   </script>
 </body>
 </html>
