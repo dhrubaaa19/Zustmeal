@@ -90,16 +90,295 @@
         padding: 1.5rem;
       }
     }
+    /* Floating Button */
+      body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      height: 200vh;
+    }
+
+    .fab-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+
+    .fab-options {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(10px) scale(0.95);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    .fab-options.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .fab-icon {
+      background: transparent;
+      border: none;
+      padding: 0;
+      margin: 6px 0;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .fab-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .fab-button {
+      width: 30px;
+      height: 30px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .fab-button img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+      transition: opacity 0.1s ease;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .fab-button img#logo {
+      opacity: 1;
+    }
+
+    .fab-button.open img#logo {
+      opacity: 0;
+    }
+
+    .fab-button img#close {
+      opacity: 0;
+    }
+
+    .fab-button.open img#close {
+      opacity: 1;
+    }
+
+    @media (max-width: 480px) {
+      .fab-container {
+        bottom: 12px;
+        right: 12px;
+      }
+
+      .fab-icon,
+      .fab-button,
+      .fab-button img {
+        width: 45px;
+        height: 45px;
+      }
+    }
+    
+/* Sidebar */
+  #sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 60%; /* ↓ reduced from 80% */
+  max-width: 240px; /* ↓ reduced from 300px */
+  height: 100%;
+  background-color: white;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--gap-unit);
+}
+
+    #sidebar.open {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    #sidebar a {
+      color: black;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+
+    .follow-text {
+      font-weight: bold;
+      font-size: 1.3rem;
+      color: black;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 16.3px;
+      align-items: center;
+    }
+
+    .social-icons img {
+      height: 2.5rem;
+      width: auto;
+    }
+
+    /* Hamburger Icon */
+    .hamburger {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1100;
+      cursor: pointer;
+      width: 30px;
+      height: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .bar {
+      height: 3px;
+      width: 100%;
+      background-color: red;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active .bar1 {
+      transform: rotate(48deg) translate(5px, 5px);
+    }
+
+    .hamburger.active .bar2 {
+      opacity: 0;
+    }
+
+    .hamburger.active .bar3 {
+      transform: rotate(-48deg) translate(5px, -5px);
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      display: none;
+    }
+
+    .overlay.show {
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+
+      .hero h2 {
+        font-size: 1rem;
+      }
+
+      .hero button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+      }
+
+      #sidebar {
+        width: 100%;
+        padding: 1.5rem 1rem;
+        gap: 30px;
+      }
+
+      #sidebar a,
+      .follow-text {
+        font-size: 0.95rem;
+      }
+
+      .social-icons img {
+        height: 1.25rem;
+      }
+
+      .hamburger {
+        width: 26px;
+        height: 22px;
+      }
+
+      .bar {
+        height: 3px;
+      }
+    }
+
+    .zust-logo {
+  height: 4.3rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .zust-logo {
+    height: 3.5rem; /* Adjust the size as per your preference */
+  }
+}
   </style>
 </head>
 <body>
   <header>
-    <h1>Become a ZustMeal Brand Ambassador!</h1>
+    <h1>Become a Brand Ambassador</h1>
   </header>
+<!-- Hamburger Icon -->
+  <div class="hamburger" onclick="toggleSidebar()" id="hamburger">
+    <div class="bar bar1"></div>
+    <div class="bar bar2"></div>
+    <div class="bar bar3"></div>
+  </div>
 
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <a href="index.html"><li></li>Zustmeal</li></a>
+    <a href="about us.html"><li>Why Zustmeal?</li></a>
+    <a href="Menu.html"><li>Taste Zone</li></a>
+    <a href="price.html"><li>Unlock Meals</li></a>
+    <a href="refer.html"><li>Become a Brand Ambassador</li></a>
+    <div class="follow-text">Let’s vibe on</div>
+    <div class="social-icons">
+      <a href="https://www.instagram.com/zustmeal?igsh=eTh2N2JvajMzMnlv" target="_blank">
+        <img src="instagram.png"/>
+      </a>
+      <a href="https://www.instagram.com/zustmeal?igsh=eTh2N2JvajMzMnlv" target="_blank">
+        <img src="facebook.png"/>
+      </a>
+      <a href="https://www.instagram.com/zustmeal?igsh=eTh2N2JvajMzMnlv" target="_blank">
+        <img src="x.png"/>
+      </a>
+    </div>
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+  
   <main>
-    <p>Love ZustMeal? Want to spread the word and earn rewards? Join our <strong>Brand Ambassador Program</strong> — where your passion for good food turns into amazing benefits!</p>
-
+    <p>We love having you as part of the <strong>ZustMeal family</strong>. Now, it’s time to join our <strong>Brand Ambassador Program</strong> — where you share the goodness with your friends — and get rewarded for it</p>
     <h2>How It Works</h2>
     <ol>
       <li><strong>Get Your Exclusive Ambassador Code</strong><br />Sign up to receive your unique Ambassador Code or link to share with friends, family, and colleagues.</li>
@@ -107,32 +386,63 @@
       <li><strong>Earn Rewards &amp; Recognition</strong><br />For every new customer who joins with your Ambassador Code, you earn <strong>₹50 credit</strong> towards your future meals — plus, you’ll get special shoutouts and perks as a valued member of our community.</li>
     </ol>
 
-    <h2>Why Become a ZustMeal Brand Ambassador?</h2>
+    <h2>Why Become a Brand Ambassador?</h2>
     <ul>
       <li><strong>Be Part of Our Food Movement:</strong> Help us bring affordable, hygienic home-cooked meals to more people.</li>
       <li><strong>Save &amp; Earn:</strong> Your friends get discounts, you get credits — everyone wins!</li>
       <li><strong>Exclusive Perks:</strong> Top ambassadors get early access to new menu items, special gifts, and more.</li>
       <li><strong>No Limits:</strong> There’s no cap on how much you can earn or how many people you can invite.</li>
     </ul>
-
-    <h2>Track Your Impact &amp; Rewards</h2>
-    <p>Log in anytime to check how many friends you’ve invited, track your credits, and see your progress as an official ZustMeal Brand Ambassador.</p>
-
     <h2>Terms &amp; Conditions</h2>
     <ul>
-      <li>Ambassador credits can only be redeemed on future orders and cannot be transferred.</li>
-      <li>Credits expire after 6 months if unused.</li>
-      <li>Discounts apply only to new customers on their first order.</li>
+      <li>Ambassador credits can only be redeemed on future orders or voucher. It cannot be transferred.</li>
+      <li>Rewards are credited within 7 working days.</li>
       <li>ZustMeal reserves the right to change or end the program at any time.</li>
     </ul>
 
     <h2>Ready to Join the ZustMeal Family?</h2>
-    <p>Become a Brand Ambassador today and start sharing the love — and the rewards!</p>
-    <p><a href="#" style="color: var(--red); font-weight: bold; text-decoration: none;">Join Now &amp; Get Your Ambassador Code</a></p>
+    <p>Become a Brand Ambassador today and start sharing the love — and the rewards</p>
+    <p><a href="https://wa.me/919365294816?text=Hey,%2C%20Send%20me%20my%20invite%20Code.%20I%20want%20to%20invite%20my%20friend" style="color: var(--red); font-weight: bold; text-decoration: none;">Join Now &amp; Get Your Ambassador Code</a></p>
   </main>
+
+  <!-- Floating Action Button -->
+<div class="fab-container">
+  <div class="fab-options" id="fabOptions">
+    <a href="tel:+919531468479" class="fab-icon">
+      <img src="phone.png" alt="Phone">
+    </a>
+    <a href="https://wa.me/919531468479text=Hello%20Zustmeal.%20I’m%20new%20in%20the%20city%20and%20interested%20in%20your%20meal%20service%2C%20hoping%20to%20find%20a%20little%20comfort%20and%20care%20in%20every%20bite%20❤️" class="fab-icon">
+  <img src="whatsapp.png" alt="WhatsApp">
+    </a>
+  </div>
+  <button class="fab-button" id="fabButton">
+    <img id="logo" src="your-logo.png" alt="Logo Icon">
+    <img id="close" src="x-logo.png" alt="Close Icon">
+  </button>
+</div>
 
   <footer>
     <p>© 2025 ZustMeal. Made with ❤️ for your hunger.</p>
   </footer>
+<script>
+  <!-- Hamburger Icon -->
+     function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const hamburger = document.getElementById('hamburger');
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('show');
+      hamburger.classList.toggle('active');
+    }
+
+  <!-- Floating Button -->
+  const fabButton = document.getElementById("fabButton");
+  const fabOptions = document.getElementById("fabOptions");
+
+  fabButton.addEventListener("click", () => {
+    fabOptions.classList.toggle("show");
+    fabButton.classList.toggle("open");
+  });
+</script>
 </body>
 </html>
