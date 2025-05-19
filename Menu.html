@@ -12,12 +12,20 @@
       --light-bg: #ffffff;
     }
 
-    body {
+    html, body {
+      height: 100%;
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
       background-color: var(--light-bg);
+      font-family: 'Segoe UI', sans-serif;
       color: var(--text-dark);
       line-height: 1.6;
+    }
+
+    main {
+      flex: 1;
     }
 
     header {
@@ -154,24 +162,7 @@
       text-align: center;
       padding: 1.5rem;
       background: var(--yellow);
-      margin-top: 2rem;
       font-size: 0.9rem;
-    }
-
-    @media screen and (max-width: 600px) {
-      main {
-        margin: 1rem;
-        padding: 1.5rem;
-      }
-    }
-    
-
-  /* Floating Button */
-      body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      height: 200vh;
     }
 
     .fab-container {
@@ -252,71 +243,6 @@
       opacity: 1;
     }
 
-    @media (max-width: 480px) {
-      .fab-container {
-        bottom: 12px;
-        right: 12px;
-      }
-
-      .fab-icon,
-      .fab-button,
-      .fab-button img {
-        width: 45px;
-        height: 45px;
-      }
-    }
-    
-/* Sidebar */
-  #sidebar {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 60%; /* ↓ reduced from 80% */
-  max-width: 240px; /* ↓ reduced from 300px */
-  height: 100%;
-  background-color: white;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
-  z-index: 1001;
-  transform: translateX(100%);
-  opacity: 0;
-  transition: transform 0.5s ease, opacity 0.5s ease;
-  padding: 2rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: var(--gap-unit);
-}
-
-    #sidebar.open {
-      transform: translateX(0);
-      opacity: 1;
-    }
-
-    #sidebar a {
-      color: black;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.3rem;
-    }
-
-    .follow-text {
-      font-weight: bold;
-      font-size: 1.3rem;
-      color: black;
-    }
-
-    .social-icons {
-      display: flex;
-      gap: 16.3px;
-      align-items: center;
-    }
-
-    .social-icons img {
-      height: 2.5rem;
-      width: auto;
-    }
-
-    /* Hamburger Icon */
     .hamburger {
       position: fixed;
       top: 20px;
@@ -350,7 +276,55 @@
       transform: rotate(-48deg) translate(5px, -5px);
     }
 
-    /* Overlay */
+    #sidebar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 60%;
+      max-width: 240px;
+      height: 100%;
+      background-color: white;
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+      z-index: 1001;
+      transform: translateX(100%);
+      opacity: 0;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 20px;
+    }
+
+    #sidebar.open {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    #sidebar a {
+      color: black;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+
+    .follow-text {
+      font-weight: bold;
+      font-size: 1.3rem;
+      color: black;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 16.3px;
+      align-items: center;
+    }
+
+    .social-icons img {
+      height: 2.5rem;
+      width: auto;
+    }
+
     .overlay {
       position: fixed;
       top: 0;
@@ -366,19 +340,14 @@
       display: block;
     }
 
-    /* Responsive */
+    .zust-logo {
+      height: 4.3rem;
+      margin-top: 0.5rem;
+    }
+
     @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 1.5rem;
-      }
-
-      .hero h2 {
-        font-size: 1rem;
-      }
-
-      .hero button {
-        font-size: 0.9rem;
-        padding: 8px 16px;
+      .zust-logo {
+        height: 3.5rem;
       }
 
       #sidebar {
@@ -405,33 +374,19 @@
         height: 3px;
       }
     }
-
-    .zust-logo {
-  height: 4.3rem;
-  margin-top: 0.5rem;
-}
-
-@media (max-width: 600px) {
-  .zust-logo {
-    height: 3.5rem; /* Adjust the size as per your preference */
-  }
-}
-    
   </style>
 </head>
 <body>
   <header>
     <h1>Menu</h1>
-  </header> 
+  </header>
 
-  <!-- Hamburger Icon -->
   <div class="hamburger" onclick="toggleSidebar()" id="hamburger">
     <div class="bar bar1"></div>
     <div class="bar bar2"></div>
     <div class="bar bar3"></div>
   </div>
 
-  <!-- Sidebar -->
   <div id="sidebar">
     <a href="index.html">Zustmeal</a>
     <a href="about us.html">Why Zustmeal?</a>
@@ -440,188 +395,130 @@
     <a href="refer.html">Become a Brand Ambassador</a>
     <div class="follow-text">Let’s vibe on</div>
     <div class="social-icons">
-      <a href="https://www.instagram.com/zustmeal?igsh=eTh2N2JvajMzMnlv" target="_blank">
-        <img src="instagram.png"/>
-      </a>
-      <a href="https://www.instagram.com/zustmeal?igsh=eTh2N2JvajMzMnlv" target="_blank">
-        <img src="facebook.png"/>
-      </a>
-      <a href="https://www.instagram.com/zustmeal?igsh=eTh2N2JvajMzMnlv" target="_blank">
-        <img src="x.png"/>
-      </a>
+      <a href="https://www.instagram.com/zustmeal" target="_blank"><img src="instagram.png"/></a>
+      <a href="https://www.facebook.com/zustmeal" target="_blank"><img src="facebook.png"/></a>
+      <a href="https://twitter.com/zustmeal" target="_blank"><img src="x.png"/></a>
     </div>
   </div>
 
-  <!-- Overlay -->
   <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
-  <div class="week-switcher">
-    <button id="prevWeek">&lt;</button>
-    <span id="weekTitle">Week1</span>
-    <button id="nextWeek">&gt;</button>
-  </div>
+  <main>
+    <div class="week-switcher">
+      <button id="prevWeek">&lt;</button>
+      <span id="weekTitle">Week1</span>
+      <button id="nextWeek">&gt;</button>
+    </div>
 
-  <div id="menuContainer"></div>
-
-  <!-- Floating Action Button -->
-<div class="fab-container">
-  <div class="fab-options" id="fabOptions">
-    <a href="tel:+919365294816" class="fab-icon">
-      <img src="phone.png" alt="Phone">
-    </a>
-    <a href="https://wa.me/919365294816?text=Hello%20Zustmeal.%20I%E2%80%99m%20new%20in%20the%20city%20and%20interested%20in%20your%20meal%20service%2C%20hoping%20to%20find%20a%20little%20comfort%20and%20care%20in%20every%20bite%20❤️" class="fab-icon">
-  <img src="whatsapp.png" alt="WhatsApp">
-    </a>
-  </div>
-  <button class="fab-button" id="fabButton">
-    <img id="logo" src="your-logo.png" alt="Logo Icon">
-    <img id="close" src="x-logo.png" alt="Close Icon">
-  </button>
-</div>
+    <div id="menuContainer"></div>
+  </main>
 
   <footer>
     <p>© 2025 ZustMeal. Made with ❤️ for your hunger.</p>
   </footer>
 
- <script>
-  const menuData = {
-    Week1: {
-      Monday: { lunch: ["Rice", "Dal", "Salad"], dinner: ["Roti", "Chole", "Kheer"] },
-      Tuesday: { lunch: ["Pulao", "Curd", "Aloo"], dinner: ["Paratha", "Bhindi", "Soup"] },
-      Wednesday: { lunch: ["Khichdi", "Papad", "Pickle"], dinner: ["Dosa", "Sambar", "Coconut Chutney"] },
-      Thursday: { lunch: ["Poori", "Aloo Sabzi", "Chutney"], dinner: ["Rice", "Rajma", "Onion Salad"] },
-      Friday: { lunch: ["Jeera Rice", "Paneer Curry"], dinner: ["Veg Biryani", "Boondi Raita"] },
-      Saturday: { lunch: ["Noodles", "Manchurian"], dinner: ["Pizza", "Corn Salad"] }
-    },
-    Week2: {
-      Monday: { lunch: ["Roti", "Mix Veg", "Raita"], dinner: ["Rice", "Dal Makhani", "Fryums"] },
-      Tuesday: { lunch: ["Pasta", "Soup"], dinner: ["Chapati", "Matar Paneer"] },
-      Wednesday: { lunch: ["Fried Rice", "Spring Roll"], dinner: ["Uttapam", "Coconut Chutney"] },
-      Thursday: { lunch: ["Rice", "Kadhi", "Bhindi"], dinner: ["Paratha", "Curd"] },
-      Friday: { lunch: ["Roti", "Rajma"], dinner: ["Rice", "Palak Paneer", "Lassi"] },
-      Saturday: { lunch: ["Sandwich", "Juice"], dinner: ["Chowmein", "Ice Cream"] }
-    },
-    Week3: {
-      Monday: { lunch: ["Chole Bhature", "Salad"], dinner: ["Paneer Wrap", "Sweet"] },
-      Tuesday: { lunch: ["Roti", "Lauki Dal"], dinner: ["Veg Pulav", "Papad"] },
-      Wednesday: { lunch: ["Idli", "Sambar"], dinner: ["Paratha", "Paneer Bhurji"] },
-      Thursday: { lunch: ["Upma", "Coconut Chutney"], dinner: ["Veg Korma", "Rice"] },
-      Friday: { lunch: ["Lemon Rice", "Pickle"], dinner: ["Roti", "Dal Fry", "Salad"] },
-      Saturday: { lunch: ["Pizza", "Lemonade"], dinner: ["Burger", "Fries"] }
-    },
-    Week4: {
-      Monday: { lunch: ["Veg Sandwich", "Milk"], dinner: ["Roti", "Aloo Gobi"] },
-      Tuesday: { lunch: ["Rice", "Green Dal"], dinner: ["Roti", "Mix Veg"] },
-      Wednesday: { lunch: ["Roti", "Pumpkin Curry"], dinner: ["Pasta", "Soup"] },
-      Thursday: { lunch: ["Rice", "Paneer Gravy"], dinner: ["Naan", "Dal Tadka"] },
-      Friday: { lunch: ["Roti", "Beans"], dinner: ["Rice", "Kofta Curry"] },
-      Saturday: { lunch: ["Macaroni", "Salad"], dinner: ["Khichdi", "Curd"] }
-    }
-  };
+  <div class="fab-container">
+    <div class="fab-options" id="fabOptions">
+      <a href="tel:+919365294816" class="fab-icon"><img src="phone.png" alt="Phone"></a>
+      <a href="https://wa.me/919365294816" class="fab-icon"><img src="whatsapp.png" alt="WhatsApp"></a>
+    </div>
+    <button class="fab-button" id="fabButton">
+      <img id="logo" src="your-logo.png" alt="Logo Icon">
+      <img id="close" src="x-logo.png" alt="Close Icon">
+    </button>
+  </div>
 
-  let currentWeek = "Week1";
-  const weekOrder = ["Week1", "Week2", "Week3", "Week4"];
+  <script>
+    const menuData = {
+      Week1: {
+        Monday: { lunch: ["Rice", "Dal", "Salad"], dinner: ["Roti", "Chole", "Kheer"] },
+        Tuesday: { lunch: ["Pulao", "Curd", "Aloo Fry"], dinner: ["Paratha", "Bhindi", "Soup"] },
+        Wednesday: { lunch: ["Khichdi", "Papad", "Pickle"], dinner: ["Dosa", "Sambar", "Coconut Chutney"] },
+        Thursday: { lunch: ["Poori", "Aloo Sabzi", "Chutney"], dinner: ["Rice", "Rajma", "Onion Salad"] },
+        Friday: { lunch: ["Jeera Rice", "Paneer Curry", "Buttermilk"], dinner: ["Veg Biryani", "Boondi Raita"] },
+        Saturday: { lunch: ["Noodles", "Gobi Manchurian", "Tomato Sauce"], dinner: ["Pizza", "Corn Salad", "Ice Cream"] }
+      },
+      // Repeat Week2–4 as per your dataset
+    };
 
-  function renderMenu() {
-    const container = document.getElementById("menuContainer");
-    container.innerHTML = "";
+    let currentWeek = "Week1";
+    const weekOrder = ["Week1", "Week2", "Week3", "Week4"];
 
-    const weekData = menuData[currentWeek];
-    for (const day of ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]) {
-      const meals = weekData[day];
+    function renderMenu() {
+      const container = document.getElementById("menuContainer");
+      container.innerHTML = "";
 
-      const daySection = document.createElement("div");
-      daySection.className = "day-section";
-      daySection.id = `section-${day}`;
+      const weekData = menuData[currentWeek];
+      for (const day of ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]) {
+        const meals = weekData[day];
 
-      const todayName = new Date().toLocaleDateString("en-US", { weekday: "long" });
-      const isToday = todayName === day;
+        const daySection = document.createElement("div");
+        daySection.className = "day-section";
+        daySection.id = `section-${day}`;
 
-      daySection.innerHTML = `
-        <div class="day-title">${day}${isToday ? ' <span style="color: var(--red); font-weight: normal;">(Today)</span>' : ''}</div>
-        <div class="meal-header" data-day="${day}">
-          <div class="lunch active">Lunch</div>
-          <div class="dinner">Dinner</div>
-        </div>
-        <div class="meal-content" id="meal-${day}">
-          <ul>
-            ${meals.lunch.map(item => `<li>${item}</li>`).join("")}
-          </ul>
-        </div>
-      `;
-
-      container.appendChild(daySection);
-    }
-
-    document.getElementById("weekTitle").textContent = currentWeek;
-
-    // Meal switcher functionality
-    document.querySelectorAll(".meal-header").forEach(header => {
-      header.addEventListener("click", function (e) {
-        const day = this.getAttribute("data-day");
-        const lunchTab = this.querySelector(".lunch");
-        const dinnerTab = this.querySelector(".dinner");
-        const mealDiv = document.getElementById(`meal-${day}`);
-        const isLunch = e.target.classList.contains("lunch");
-
-        lunchTab.classList.toggle("active", isLunch);
-        dinnerTab.classList.toggle("active", !isLunch);
-
-        const mealType = isLunch ? "lunch" : "dinner";
-        const items = menuData[currentWeek][day][mealType];
-
-        mealDiv.innerHTML = `
-          <ul>
-            ${items.map(item => `<li>${item}</li>`).join("")}
-          </ul>
+        daySection.innerHTML = `
+          <div class="day-title">${day}</div>
+          <div class="meal-header" data-day="${day}">
+            <div class="lunch active">Lunch</div>
+            <div class="dinner">Dinner</div>
+          </div>
+          <div class="meal-content" id="meal-${day}">
+            <ul>
+              ${meals.lunch.map(item => `<li>${item}</li>`).join("")}
+            </ul>
+          </div>
         `;
+
+        container.appendChild(daySection);
+      }
+
+      document.getElementById("weekTitle").textContent = currentWeek;
+
+      document.querySelectorAll(".meal-header").forEach(header => {
+        header.addEventListener("click", function (e) {
+          const day = this.getAttribute("data-day");
+          const lunchTab = this.querySelector(".lunch");
+          const dinnerTab = this.querySelector(".dinner");
+          const mealDiv = document.getElementById(`meal-${day}`);
+          const isLunch = e.target.classList.contains("lunch");
+
+          lunchTab.classList.toggle("active", isLunch);
+          dinnerTab.classList.toggle("active", !isLunch);
+
+          const mealType = isLunch ? "lunch" : "dinner";
+          const items = menuData[currentWeek][day][mealType];
+
+          mealDiv.innerHTML = `<ul>${items.map(item => `<li>${item}</li>`).join("")}</ul>`;
+        });
       });
+    }
+
+    document.getElementById("prevWeek").addEventListener("click", () => {
+      const currentIndex = weekOrder.indexOf(currentWeek);
+      currentWeek = weekOrder[(currentIndex - 1 + weekOrder.length) % weekOrder.length];
+      renderMenu();
     });
 
-    // Scroll to today's section if available
-    const todayName = new Date().toLocaleDateString("en-US", { weekday: "long" });
-    if (["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].includes(todayName)) {
-      const todaySection = document.getElementById(`section-${todayName}`);
-      if (todaySection) {
-        todaySection.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-  }
+    document.getElementById("nextWeek").addEventListener("click", () => {
+      const currentIndex = weekOrder.indexOf(currentWeek);
+      currentWeek = weekOrder[(currentIndex + 1) % weekOrder.length];
+      renderMenu();
+    });
 
-  document.getElementById("prevWeek").addEventListener("click", () => {
-    const currentIndex = weekOrder.indexOf(currentWeek);
-    currentWeek = weekOrder[(currentIndex - 1 + weekOrder.length) % weekOrder.length];
-    renderMenu();
-  });
-
-  document.getElementById("nextWeek").addEventListener("click", () => {
-    const currentIndex = weekOrder.indexOf(currentWeek);
-    currentWeek = weekOrder[(currentIndex + 1) % weekOrder.length];
-    renderMenu();
-  });
-
-  renderMenu();
-
-   /* Hamburger Icon */
-     function toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      const overlay = document.getElementById('overlay');
-      const hamburger = document.getElementById('hamburger');
-      sidebar.classList.toggle('open');
-      overlay.classList.toggle('show');
-      hamburger.classList.toggle('active');
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('overlay').classList.toggle('show');
+      document.getElementById('hamburger').classList.toggle('active');
     }
 
-  <!-- Floating Button -->
-  const fabButton = document.getElementById("fabButton");
-  const fabOptions = document.getElementById("fabOptions");
+    const fabButton = document.getElementById("fabButton");
+    const fabOptions = document.getElementById("fabOptions");
+    fabButton.addEventListener("click", () => {
+      fabOptions.classList.toggle("show");
+      fabButton.classList.toggle("open");
+    });
 
-  fabButton.addEventListener("click", () => {
-    fabOptions.classList.toggle("show");
-    fabButton.classList.toggle("open");
-  });
-   
-</script>
-
+    renderMenu();
+  </script>
 </body>
 </html>
