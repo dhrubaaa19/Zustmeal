@@ -16,12 +16,29 @@
       box-sizing: border-box;
     }
 
+    html, body {
+      height: 100%;
+    }
+
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background-color: var(--light-bg);
       color: var(--text-dark);
       line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+      max-width: 95%;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.07);
     }
 
     header {
@@ -44,16 +61,6 @@
     header p {
       font-size: 0.95rem;
       margin: 0.3rem 0 0;
-    }
-
-    main {
-      max-width: 95%;
-      width: 100%;
-      margin: 2rem auto;
-      padding: 1.5rem;
-      background: white;
-      border-radius: 1rem;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.07);
     }
 
     form {
@@ -128,24 +135,9 @@
       width: 90%;
     }
 
-    .spinner {
-      border: 5px solid #eee;
-      border-top: 5px solid var(--red);
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      margin: 0 auto 1rem;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
     .popup-message {
       font-size: 1rem;
-      margin-bottom: 1rem;
+      margin-top: 1rem;
     }
 
     .popup-message.success {
@@ -164,6 +156,28 @@
       border-radius: 30px;
       font-weight: bold;
       cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    .terms-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .terms-container input[type="checkbox"] {
+      margin-top: 3px;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .terms-container a {
+      color: red;
+      text-decoration: underline;
+      font-weight: bold;
     }
 
     footer {
@@ -172,229 +186,7 @@
       background: var(--yellow);
       color: var(--text-dark);
       font-size: 0.9rem;
-      margin-top: 2rem;
     }
-
-    @media (max-width: 600px) {
-      button {
-        width: 65%;
-      }
-    }
-
-    @media (min-width: 600px) {
-      main {
-        max-width: 520px;
-      }
-    }
-
-     @keyframes successFadeIn {
-  0% {
-    transform: scale(0.9) translateY(20px);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1) translateY(0);
-    opacity: 1;
-  }
-}
-
-.popup-message.success {
-  color: green;
-  animation: successFadeIn 0.6s ease-out;
-}
-
-.terms-container {
-  display: flex;
-  align-items: flex-start; /* Align checkbox to the top */
-  gap: 10px;
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.terms-container input[type="checkbox"] {
-  margin-top: 3px; /* Fine-tune this value to perfectly match your text baseline */
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-}
-
-.terms-container a {
-  color: red;
-  text-decoration: underline;
-  font-weight: bold;
-}
-    /* Floating Button */
-      body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      height: 200vh;
-    }
-
-    .fab-container {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 999;
-    }
-
-    .fab-options {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 10px;
-      opacity: 0;
-      transform: translateY(10px) scale(0.95);
-      transition: all 0.3s ease;
-      pointer-events: none;
-    }
-
-    .fab-options.show {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      pointer-events: auto;
-    }
-
-    .fab-icon {
-      background: transparent;
-      border: none;
-      padding: 0;
-      margin: 6px 0;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    .fab-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    .fab-button {
-      width: 30px;
-      height: 30px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .fab-button img {
-      width: 30px;
-      height: 30px;
-      object-fit: contain;
-      transition: opacity 0.1s ease;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
-    .fab-button img#logo {
-      opacity: 1;
-    }
-
-    .fab-button.open img#logo {
-      opacity: 0;
-    }
-
-    .fab-button img#close {
-      opacity: 0;
-    }
-
-    .fab-button.open img#close {
-      opacity: 1;
-    }
-
-    @media (max-width: 480px) {
-      .fab-container {
-        bottom: 12px;
-        right: 12px;
-      }
-
-      .fab-icon,
-      .fab-button,
-      .fab-button img {
-        width: 45px;
-        height: 45px;
-      }
-    }
-    
-/* Sidebar */
-  #sidebar {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 60%; /* ↓ reduced from 80% */
-  max-width: 240px; /* ↓ reduced from 300px */
-  height: 100%;
-  background-color: white;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
-  z-index: 1001;
-  transform: translateX(100%);
-  opacity: 0;
-  transition: transform 0.5s ease, opacity 0.5s ease;
-  padding: 2rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: var(--gap-unit);
-}
-
-    #sidebar.open {
-      transform: translateX(0);
-      opacity: 1;
-    }
-
-    #sidebar a {
-      color: black;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.3rem;
-    }
-
-    .follow-text {
-      font-weight: bold;
-      font-size: 1.3rem;
-      color: black;
-    }
-
-    .social-icons {
-      display: flex;
-      gap: 16.3px;
-      align-items: center;
-    }
-
-    .social-icons img {
-      height: 2.5rem;
-      width: auto;
-    }
-
-    /* Hamburger Icon */
-    .hamburger {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1100;
-      cursor: pointer;
-      width: 30px;
-      height: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .bar {
-      height: 3px;
-      width: 100%;
-      background-color: red;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-
   </style>
 </head>
 <body>
@@ -406,271 +198,126 @@
   <main>
     <form id="plan-form">
       <input type="hidden" id="selected-plan" name="selected_plan" />
+      <label>Full Name</label>
+      <input type="text" required name="name" id="name" />
 
-      <div>
-        <label for="name">Full Name</label>
-        <input type="text" required name="name" id="name" placeholder="Your Name" />
-      </div>
+      <label>Phone</label>
+      <input type="tel" required name="phone" id="phone" pattern="[0-9]{10}" />
 
-      <div>
-        <label for="phone">Contact Number</label>
-        <input type="tel" required name="phone" id="phone" placeholder="10-digit number" pattern="[0-9]{10}" />
-      </div>
+      <label>Email</label>
+      <input type="email" required name="email" id="email" />
 
-      <div>
-        <label for="alt_phone">Alternate Contact Number</label>
-        <input type="tel" name="alt_phone" id="alt_phone" placeholder="Optional alternate number" />
-      </div>
+      <label>Delivery Address</label>
+      <textarea required name="address" id="address" rows="3"></textarea>
 
-      <div>
-        <label for="email">Email Address</label>
-        <input type="email" required name="email" id="email" placeholder="example@email.com" />
-      </div>
+      <label>Pin Code</label>
+      <input type="text" required name="pincode" id="pincode" pattern="[0-9]{6}" />
 
-      <div>
-        <label for="address">Full Delivery Address</label>
-        <textarea required name="address" id="address" rows="3" placeholder="Complete address with area, landmark, etc."></textarea>
-      </div>
-
-      <div>
-        <label for="pincode">Pin Code</label>
-        <input type="text" required name="pincode" id="pincode" pattern="[0-9]{6}" placeholder="6-digit PIN" />
-      </div>
-
-      <div>
-        <label for="flatname">House / Flat / PG Name</label>
-        <input type="text" required name="flatname" id="flatname" placeholder="e.g., Green Residency, PG Elite" />
-      </div>
-
-      <div>
-        <label for="slot">Preferred Delivery Time Slot</label>
-        <select required name="slot" id="slot">
-          <option value="">Select Time Slot</option>
-          <option value="1-3">1:00 PM - 3:00 PM</option>
-          <option value="3-5">3:00 PM - 5:00 PM</option>
-        </select>
-      </div>
-
-      <div>
-        <label for="payment_mode">Mode of Payment</label>
-        <select required name="payment_mode" id="payment_mode">
-          <option value="">Select Payment Mode</option>
-          <option value="upi">UPI</option>
-          <option value="bank">Bank Transfer</option>
-        </select>
-      </div>
+      <label>Payment Mode</label>
+      <select required name="payment_mode" id="payment_mode">
+        <option value="">Select Payment Mode</option>
+        <option value="upi">UPI</option>
+        <option value="bank">Bank Transfer</option>
+      </select>
 
       <div id="upi-details" class="hidden">
         <label>Scan & Pay</label>
-        <img src="your-upi-qr-code.png" alt="UPI QR" style="width: 160px; margin-bottom: 10px;" />
-        <div style="margin-top: 0.5rem;">
-          <span><strong>UPI ID:</strong> 1234567789@okbizaxis</span>
-          <span class="copy-icon" onclick="copyUPI()" style="margin-left: 8px; cursor:pointer;">📋</span>
-        </div>
+        <img src="your-upi-qr-code.png" style="width: 150px;" />
+        <p><strong>UPI ID:</strong> 1234567789@okbizaxis</p>
       </div>
 
-      <div id="bank-details" class="hidden" style="margin-top: 1rem;">
-        <label>Bank Transfer Details</label>
-        <div style="line-height: 1.7;">
-          <div><strong>Account Name:</strong> ZustMeal Services</div>
-          <div><strong>Account Number:</strong> 1234567890</div>
-          <div><strong>IFSC:</strong> HDFC0001234</div>
-          <div><strong>Bank Name:</strong> HDFC Bank</div>
-        </div>
+      <div id="bank-details" class="hidden">
+        <label>Bank Details</label>
+        <p>Account: ZustMeal Services</p>
+        <p>Acc No: 1234567890</p>
+        <p>IFSC: HDFC0001234</p>
       </div>
 
-      <div>
-        <label for="transaction_id">Transaction ID</label>
-        <input type="text" required name="transaction_id" id="transaction_id" placeholder="Enter Transaction Reference" />
-      </div>
-
-      <div id="referral-group" class="hidden">
-        <label for="referral">Referral ID (Optional)</label>
-        <input type="text" name="referral" id="referral" placeholder="e.g. ZUST30" />
-      </div>
+      <label>Transaction ID</label>
+      <input type="text" required name="transaction_id" id="transaction_id" />
 
       <div class="terms-container">
-  <input type="checkbox" id="terms" required />
-  <label for="terms">
-    I have read and agree to the 
-    <a href="terms.html" target="_blank" style="color:red;">Terms & Conditions</a> and 
-    <a href="privacy.html" target="_blank" style="color:red;">Privacy Policy</a> of ZustMeal.
-  </label>
-</div>
-      
-      <button type="submit">Submit My Meal Plan</button>
+        <input type="checkbox" id="terms" required />
+        <label for="terms">I agree to <a href="#">Terms</a> and <a href="#">Privacy</a>.</label>
+      </div>
+
+      <button type="submit">Submit</button>
     </form>
   </main>
 
   <footer>
     <p>© 2025 ZustMeal. Made with ❤️ for your hunger.</p>
   </footer>
-  
-<!-- Floating Action Button -->
-<div class="fab-container">
-  <div class="fab-options" id="fabOptions">
-    <a href="tel:+919365294816" class="fab-icon">
-      <img src="phone.png" alt="Phone">
-    </a>
-    <a href="https://wa.me/919365294816text=Hello%20Zustmeal.%20I’m%20new%20in%20the%20city%20and%20interested%20in%20your%20meal%20service%2C%20hoping%20to%20find%20a%20little%20comfort%20and%20care%20in%20every%20bite%20❤️" class="fab-icon">
-  <img src="whatsapp.png" alt="WhatsApp">
-    </a>
-  </div>
-  <button class="fab-button" id="fabButton">
-    <img id="logo" src="your-logo.png" alt="Logo Icon">
-    <img id="close" src="x-logo.png" alt="Close Icon">
-  </button>
-</div>
-  
-  <!-- POPUP HTML -->
-  <div id="popup" style="display: none;" class="popup-overlay">
+
+  <!-- Pop-up -->
+  <div id="popup" class="popup-overlay" style="display: none;">
     <div class="popup-box">
-      <div id="popupSpinner" class="spinner"></div>
+      <video id="popupLoaderVideo" autoplay muted loop playsinline width="140" style="margin: auto; display: block;">
+        <source src="loading.mp4" type="video/mp4" />
+      </video>
+      <video id="popupSuccessVideo" autoplay muted loop playsinline width="140" style="margin: auto; display: none;">
+        <source src="success.mp4" type="video/mp4" />
+      </video>
       <p id="popupMessage" class="popup-message">Processing...</p>
       <button id="popupClose" class="popup-close">Close</button>
     </div>
   </div>
 
+  <!-- Script -->
   <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const plan = urlParams.get('plan');
-    const selectedPlanInput = document.getElementById('selected-plan');
-    const referralGroup = document.getElementById('referral-group');
-    const paymentSelect = document.getElementById('payment_mode');
-    const upiDetails = document.getElementById('upi-details');
-    const bankDetails = document.getElementById('bank-details');
-
     const popup = document.getElementById('popup');
-    const spinner = document.getElementById('popupSpinner');
+    const loaderVideo = document.getElementById('popupLoaderVideo');
+    const successVideo = document.getElementById('popupSuccessVideo');
     const message = document.getElementById('popupMessage');
     const popupClose = document.getElementById('popupClose');
+    const form = document.getElementById('plan-form');
 
-    if (plan) {
-      selectedPlanInput.value = plan;
-      if (plan === 'trial') {
-        referralGroup.classList.remove('hidden');
-      }
-    } else {
-      alert("No plan selected. Please go back and choose a plan.");
-      document.getElementById('plan-form').classList.add('hidden');
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      setTimeout(() => {
-        document.getElementById('name').scrollIntoView({ behavior: 'smooth' });
-      }, 300);
+    document.getElementById('payment_mode').addEventListener('change', (e) => {
+      document.getElementById('upi-details').classList.toggle('hidden', e.target.value !== 'upi');
+      document.getElementById('bank-details').classList.toggle('hidden', e.target.value !== 'bank');
     });
-
-    paymentSelect.addEventListener('change', () => {
-      const value = paymentSelect.value;
-      upiDetails.classList.toggle('hidden', value !== 'upi');
-      bankDetails.classList.toggle('hidden', value !== 'bank');
-    });
-
-    function copyUPI() {
-      const upiId = "1234567789@okbizaxis";
-      navigator.clipboard.writeText(upiId)
-        .then(() => alert("✅ UPI ID copied!"))
-        .catch(() => alert("❌ Failed to copy."));
-    }
 
     popupClose.addEventListener('click', () => {
       popup.style.display = 'none';
+      loaderVideo.style.display = 'block';
+      successVideo.style.display = 'none';
+      message.textContent = 'Processing...';
+      message.className = 'popup-message';
     });
 
-        document.getElementById('plan-form').addEventListener('submit', function (e) {
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
 
       popup.style.display = 'flex';
-      spinner.style.display = 'block';
+      loaderVideo.style.display = 'block';
+      successVideo.style.display = 'none';
       message.textContent = 'Processing...';
       message.className = 'popup-message';
 
-      const form = e.target;
-      const data = new URLSearchParams();
-
+      const data = new URLSearchParams(new FormData(form));
       data.append("Date", new Date().toLocaleString());
-      data.append("Full Name", form.name.value);
-      data.append("Contact Number", form.phone.value);
-      data.append("Alternate Contact Number", form.alt_phone.value);
-      data.append("Email Address", form.email.value);
-      data.append("Full Delivery Address", form.address.value);
-      data.append("Pin Code", form.pincode.value);
-      data.append("House/Flat/PG Name", form.flatname.value);
-      data.append("Delivery Time Slot", form.slot.value);
-      data.append("Payment Mode", form.payment_mode.value);
-      data.append("Transaction ID", form.transaction_id.value);
-      data.append("Referral ID", form.referral.value || "");
 
-      fetch("https://script.google.com/macros/s/AKfycbweGis6lRGqBzfHToT44_9tKzFw1xsQ4gzEmcDMR8Pk7GHyirlrFtP2Tn3y6tYfT2uU/exec", {
+      fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: data.toString()
+        body: data.toString(),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
       })
       .then(res => res.json())
       .then(response => {
-        spinner.style.display = 'none';
-        if (response.result === "success") {
-          message.textContent = '✅ Form submitted successfully!';
-          message.className = 'popup-message success';
-          // Trigger vibration on successful form submission
-          if ("vibrate" in navigator) {
-            navigator.vibrate(200); // Vibrate for 200ms
-          }
-          form.reset();
-          upiDetails.classList.add('hidden');
-          bankDetails.classList.add('hidden');
-        } else {
-          message.textContent = '❌ ' + (response.error || 'Something went wrong.');
-          message.className = 'popup-message error';
-          // Trigger vibration on error
-          if ("vibrate" in navigator) {
-            navigator.vibrate([100, 50, 100]); // Pattern: vibrate for 100ms, pause 50ms, vibrate for 100ms
-          }
-        }
+        loaderVideo.style.display = 'none';
+        successVideo.style.display = 'block';
+        message.textContent = '✅ Form submitted successfully!';
+        message.className = 'popup-message success';
+        form.reset();
+        document.getElementById('upi-details').classList.add('hidden');
+        document.getElementById('bank-details').classList.add('hidden');
       })
-      .catch(error => {
-        spinner.style.display = 'none';
-        message.textContent = '🚨 Network error. Please try again.';
+      .catch(() => {
+        loaderVideo.style.display = 'none';
+        message.textContent = '❌ Something went wrong.';
         message.className = 'popup-message error';
-        console.error("Error:", error);
-        // Trigger vibration on error
-        if ("vibrate" in navigator) {
-          navigator.vibrate([100, 50, 100]); // Pattern: vibrate for 100ms, pause 50ms, vibrate for 100ms
-        }
       });
     });
-
-    function copyUPI() {
-      const upiId = "1234567789@okbizaxis";
-      navigator.clipboard.writeText(upiId)
-        .then(() => {
-          alert("✅ UPI ID copied");
-          // Trigger vibration when UPI ID is copied
-          if ("vibrate" in navigator) {
-            navigator.vibrate(100); // Vibrate for 100ms
-          }
-        })
-        .catch(() => {
-          alert("❌ Failed to copy.");
-          // Trigger vibration on error while copying
-          if ("vibrate" in navigator) {
-            navigator.vibrate([100, 50, 100]); // Pattern: vibrate for 100ms, pause 50ms, vibrate for 100ms
-          }
-        });
-    }
-
-  <!-- Floating Button -->
-  const fabButton = document.getElementById("fabButton");
-  const fabOptions = document.getElementById("fabOptions");
-
-  fabButton.addEventListener("click", () => {
-    fabOptions.classList.toggle("show");
-    fabButton.classList.toggle("open");
-  });
-
   </script>
 </body>
 </html>
