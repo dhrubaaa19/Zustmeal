@@ -47,17 +47,17 @@
     }
 
     .hero-content {
-  position: relative;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  height: 100%;
-  padding-bottom: 5rem;
-  text-align: center;
-  color: white;
-}
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      height: 100%;
+      padding-bottom: 5rem;
+      text-align: center;
+      color: white;
+    }
 
     h1 {
       font-size: 2rem;
@@ -168,15 +168,6 @@
         padding: 1.5rem;
       }
     }
-    
-
-  /* Floating Button */
-      body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      height: 200vh;
-    }
 
     .fab-container {
       position: fixed;
@@ -256,40 +247,25 @@
       opacity: 1;
     }
 
-    @media (max-width: 480px) {
-      .fab-container {
-        bottom: 12px;
-        right: 12px;
-      }
-
-      .fab-icon,
-      .fab-button,
-      .fab-button img {
-        width: 45px;
-        height: 45px;
-      }
+    #sidebar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 60%;
+      max-width: 240px;
+      height: 100%;
+      background-color: white;
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+      z-index: 1001;
+      transform: translateX(100%);
+      opacity: 0;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: var(--gap-unit);
     }
-    
-/* Sidebar */
-  #sidebar {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 60%; /* ↓ reduced from 80% */
-  max-width: 240px; /* ↓ reduced from 300px */
-  height: 100%;
-  background-color: white;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
-  z-index: 1001;
-  transform: translateX(100%);
-  opacity: 0;
-  transition: transform 0.5s ease, opacity 0.5s ease;
-  padding: 2rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: var(--gap-unit);
-}
 
     #sidebar.open {
       transform: translateX(0);
@@ -320,7 +296,6 @@
       width: auto;
     }
 
-    /* Hamburger Icon */
     .hamburger {
       position: fixed;
       top: 20px;
@@ -354,35 +329,18 @@
       transform: rotate(-48deg) translate(5px, -5px);
     }
 
-    /* Overlay */
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-      display: none;
-    }
-
     .overlay.show {
       display: block;
     }
 
-    /* Responsive */
+    .zust-logo {
+      height: 4.3rem;
+      margin-top: 0.5rem;
+    }
+
     @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 1.5rem;
-      }
-
-      .hero h2 {
-        font-size: 1rem;
-      }
-
-      .hero button {
-        font-size: 0.9rem;
-        padding: 8px 16px;
+      .zust-logo {
+        height: 3.5rem;
       }
 
       #sidebar {
@@ -409,23 +367,11 @@
         height: 3px;
       }
     }
-
-    .zust-logo {
-  height: 4.3rem;
-  margin-top: 0.5rem;
-}
-
-@media (max-width: 600px) {
-  .zust-logo {
-    height: 3.5rem; /* Adjust the size as per your preference */
-  }
-}
-
   </style>
 </head>
 <body>
 
-   <!-- Hamburger Icon -->
+  <!-- Hamburger Icon -->
   <div class="hamburger" onclick="toggleSidebar()" id="hamburger">
     <div class="bar bar1"></div>
     <div class="bar bar2"></div>
@@ -441,39 +387,22 @@
     <a href="refer.html">Become a Brand Ambassador</a>
     <div class="follow-text">Let’s vibe on</div>
     <div class="social-icons">
-      <a href="https://www.instagram.com/zustmeal?igsh=eTh2N2JvajMzMnlv" target="_blank">
-        <img src="instagram.png"/>
-      </a>
-      <a href="https://www.instagram.com/zustmeal?igsh=eTh2N2JvajMzMnlv" target="_blank">
-        <img src="facebook.png"/>
-      </a>
-      <a href="https://www.instagram.com/zustmeal?igsh=eTh2N2JvajMzMnlv" target="_blank">
-        <img src="x.png"/>
-      </a>
+      <a href="https://www.instagram.com/zustmeal?igsh=eTh2N2JvajMzMnlv" target="_blank"><img src="instagram.png"/></a>
+      <a href="https://www.instagram.com/zustmeal?igsh=eTh2N2JvajMzMnlv" target="_blank"><img src="facebook.png"/></a>
+      <a href="https://www.instagram.com/zustmeal?igsh=eTh2N2JvajMzMnlv" target="_blank"><img src="x.png"/></a>
     </div>
   </div>
 
   <!-- Overlay -->
   <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
- <!-- Hero Section -->
+  <!-- Hero Section -->
   <div class="hero">
-
-    <video
-  autoplay
-  muted
-  loop
-  playsinline
-  preload="auto"
-  poster="hero-poster.jpg"
-  width="100%"
-  height="auto">
-  <source src="Hero-Video.mp4" type="video/mp4" />
-  <!-- WebM can be included for non-iOS browsers -->
-  <source src="Hero-Video.webm" type="video/webm" />
-  (Your browser does not support the video tag.)
-  </video>
-
+    <video autoplay muted loop playsinline preload="auto" poster="hero-poster.jpg">
+      <source src="Hero-Video.mp4" type="video/mp4" />
+      <source src="Hero-Video.webm" type="video/webm" />
+      (Your browser does not support the video tag.)
+    </video>
     <div class="overlay"></div>
     <div class="hero-content">
       <h1 style="margin-bottom: 0.1rem;">
@@ -485,17 +414,17 @@
     </div>
   </div>
 
-  <!-- How it Works Section -->
+  <!-- How it Works -->
   <section>
     <h2 class="section-heading">How ZustMeal Works</h2>
     <div class="grid grid-cols-3">
-      <div><h3>🥘Choose Your Taste</h3><p>Select from partner kitchens offering tasty, hygienic meals.(Comeing Soon) </p></div> 
+      <div><h3>🥘Choose Your Taste</h3><p>Select from partner kitchens offering tasty, hygienic meals.(Comeing Soon)</p></div> 
       <div><h3>🏍 Get It Delivered</h3><p>Delivered by us — hot & fresh.</p></div>
       <div><h3>💚 Enjoy Everyday</h3><p>Affordable, home-style meals designed for students, office-goers & more.</p></div>
     </div>
   </section>
 
-  <!-- Why Choose Section -->
+  <!-- Why Choose -->
   <section style="background-color: #fef9f0;">
     <h2 class="section-heading">Why Choose ZustMeal?</h2>
     <div class="grid grid-cols-4">
@@ -506,7 +435,7 @@
     </div>
   </section>
 
-  <!-- Choose Plan Section -->
+  <!-- Plans -->
   <section id="choose-plan">
     <h2 class="section-heading">🍽️Pick Your Plate</h2>
     <div class="grid grid-cols-3">
@@ -529,69 +458,68 @@
     </div>
   </section>
 
-  <!-- Refer and Earn -->
+  <!-- Refer -->
   <section style="background-color: #fef9f0;">
     <h2 class="section-heading">Become a Brand Ambassador</h2>
     <p>Invite your friends to join Zustmeal and unlock credits every time they subscribe.</p>
-    <a 
-      href="refer.html"
-      class="btn"
-      style="background-color: green;"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Invite Now
-    </a>
+    <a href="refer.html" class="btn" style="background-color: green;" target="_blank" rel="noopener noreferrer">Invite Now</a>
   </section>
 
-<!-- Floating Action Button -->
-<div class="fab-container">
-  <div class="fab-options" id="fabOptions">
-    <a href="tel:+919365294816" class="fab-icon">
-      <img src="phone.png" alt="Phone">
-    </a>
-    <a href="https://wa.me/919365294816?text=Hello%20Zustmeal.%20I%E2%80%99m%20new%20in%20the%20city%20and%20interested%20in%20your%20meal%20service%2C%20hoping%20to%20find%20a%20little%20comfort%20and%20care%20in%20every%20bite%20❤️" class="fab-icon">
-  <img src="whatsapp.png" alt="WhatsApp">
-    </a>
+  <!-- FAB -->
+  <div class="fab-container">
+    <div class="fab-options" id="fabOptions">
+      <a href="tel:+919365294816" class="fab-icon"><img src="phone.png" alt="Phone"></a>
+      <a href="https://wa.me/919365294816?text=Hello%20Zustmeal..." class="fab-icon"><img src="whatsapp.png" alt="WhatsApp"></a>
+    </div>
+    <button class="fab-button" id="fabButton">
+      <img id="logo" src="your-logo.png" alt="Logo Icon">
+      <img id="close" src="x-logo.png" alt="Close Icon">
+    </button>
   </div>
-  <button class="fab-button" id="fabButton">
-    <img id="logo" src="your-logo.png" alt="Logo Icon">
-    <img id="close" src="x-logo.png" alt="Close Icon">
-  </button>
-</div>
 
   <!-- Footer -->
   <footer>
     <p>© 2025 ZustMeal. Made with ❤️ for your hunger.</p>
   </footer>
 
-  <!-- Typing/Erasing Script -->
+  <!-- Script -->
   <script>
     const textElement = document.getElementById("typing-text");
-    const textToType = " Fresh, home-style meals delivered with care.";
+    const textToType = "Fresh, home-style meals delivered with care.";
     let index = 0;
     let isDeleting = false;
 
     function typeEffect() {
       if (isDeleting) {
-        textElement.textContent = textToType.substring(1, index--);
+        textElement.textContent = textToType.substring(0, index--);
       } else {
-        textElement.textContent = textToType.substring(1, index++);
+        textElement.textContent = textToType.substring(0, index++);
       }
+
+      let speed = isDeleting ? 40 : 80;
 
       if (!isDeleting && index === textToType.length) {
-        setTimeout(() => isDeleting = true, 1200); // Wait before erasing
-      } else if (isDeleting && index === 0) {
-        isDeleting = false;
+        setTimeout(() => {
+          isDeleting = true;
+          typeEffect();
+        }, 1200);
+        return;
       }
 
-      setTimeout(typeEffect, isDeleting ? 40 : 80);
+      if (isDeleting && index === 0) {
+        setTimeout(() => {
+          isDeleting = false;
+          typeEffect();
+        }, 500);
+        return;
+      }
+
+      setTimeout(typeEffect, speed);
     }
 
     document.addEventListener("DOMContentLoaded", typeEffect);
 
-/* Hamburger Icon */
-     function toggleSidebar() {
+    function toggleSidebar() {
       const sidebar = document.getElementById('sidebar');
       const overlay = document.getElementById('overlay');
       const hamburger = document.getElementById('hamburger');
@@ -600,15 +528,13 @@
       hamburger.classList.toggle('active');
     }
 
-  <!-- Floating Button -->
-  const fabButton = document.getElementById("fabButton");
-  const fabOptions = document.getElementById("fabOptions");
+    const fabButton = document.getElementById("fabButton");
+    const fabOptions = document.getElementById("fabOptions");
 
-  fabButton.addEventListener("click", () => {
-    fabOptions.classList.toggle("show");
-    fabButton.classList.toggle("open");
-  });
-
+    fabButton.addEventListener("click", () => {
+      fabOptions.classList.toggle("show");
+      fabButton.classList.toggle("open");
+    });
   </script>
 </body>
 </html>
