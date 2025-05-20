@@ -265,59 +265,127 @@
 
   <!-- Script -->
   <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const plan = urlParams.get('plan');
+    const selectedPlanInput = document.getElementById('selected-plan');
+    const referralGroup = document.getElementById('referral-group');
+    const paymentSelect = document.getElementById('payment_mode');
+    const upiDetails = document.getElementById('upi-details');
+    const bankDetails = document.getElementById('bank-details');
+
     const popup = document.getElementById('popup');
-    const loaderVideo = document.getElementById('popupLoaderVideo');
-    const successVideo = document.getElementById('popupSuccessVideo');
+    const popupVideo = document.getElementById('popupVideo');
     const message = document.getElementById('popupMessage');
     const popupClose = document.getElementById('popupClose');
-    const form = document.getElementById('plan-form');
 
-    document.getElementById('payment_mode').addEventListener('change', (e) => {
-      document.getElementById('upi-details').classList.toggle('hidden', e.target.value !== 'upi');
-      document.getElementById('bank-details').classList.toggle('hidden', e.target.value !== 'bank');
+    if (plan) {
+      selectedPlanInput.value = plan;
+      if (plan === 'trial') {
+        referralGroup.classList.remove('hidden');
+      }
+    } else {
+      alert("No plan selected. Please go back and choose a plan.");
+      document.getElementById('plan-form').classList.add('hidden');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.getElementById('name').scrollIntoView({ behavior: 'smooth' });
+      }, 300);
     });
+
+    paymentSelect.addEventListener('change', () => {
+      const value = paymentSelect.value;
+      upiDetails.classList.toggle('hidden', value !== 'upi');
+      bankDetails.classList.toggle('hidden', value !== 'bank');
+    });
+
+    function copyUPI() {
+      const upiId = "1234567789@okbizaxis";
+      navigator.clipboard.writeText(upiId)
+        .then(() => alert("✅ UPI ID copied!"))
+        .catch(() => alert("❌ Failed to copy."));
+    }
 
     popupClose.addEventListener('click', () => {
       popup.style.display = 'none';
-      loaderVideo.style.display = 'block';
-      successVideo.style.display = 'none';
-      message.textContent = 'Processing...';
-      message.className = 'popup-message';
     });
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+       document.getElementById('plan-form').addEventListener('submit', function (e) {
+  e.preventDefault();
 
-      popup.style.display = 'flex';
-      loaderVideo.style.display = 'block';
-      successVideo.style.display = 'none';
-      message.textContent = 'Processing...';
-      message.className = 'popup-message';
+  popup.style.display = 'flex';
+  popupVideo.style.display = 'block';
+  message.textContent = 'Processing...';
+  message.className = 'popup-message';
 
-      const data = new URLSearchParams(new FormData(form));
-      data.append("Date", new Date().toLocaleString());
+  const form = e.target;
+  const data = new URLSearchParams();
 
-      fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
-        method: "POST",
-        body: data.toString(),
-        headers: { "Content-Type": "application/x-www-form-urlencoded" }
-      })
-      .then(res => res.json())
-      .then(response => {
-        loaderVideo.style.display = 'none';
-        successVideo.style.display = 'block';
-        message.textContent = '✅ Form submitted successfully!';
-        message.className = 'popup-message success';
-        form.reset();
-        document.getElementById('upi-details').classList.add('hidden');
-        document.getElementById('bank-details').classList.add('hidden');
-      })
-      .catch(() => {
-        loaderVideo.style.display = 'none';
-        message.textContent = '❌ Something went wrong.';
-        message.className = 'popup-message error';
-      });
-    });
-  </script>
+  data.append("Date", new Date().toLocaleString());
+  data.append("Full Name", form.name.value);
+  data.append("Contact Number", form.phone.value);
+  data.append("Alternate Contact Number", form.alt_phone.value);
+  data.append("Email Address", form.email.value);
+  data.append("Full Delivery Address", form.address.value);
+  data.append("Pin Code", form.pincode.value);
+  data.append("House/Flat/PG Name", form.flatname.value);
+  data.append("Delivery Time Slot", form.slot.value);
+  data.append("Payment Mode", form.payment_mode.value);
+  data.append("Transaction ID", form.transaction_id.value);
+  data.append("Referral ID", form.referral.value || "");
+
+  fetch("https://script.google.com/macros/s/AKfycbweGis6lRGqBzfHToT44_9tKzFw1xsQ4gzEmcDMR8Pk7GHyirlrFtP2Tn3y6tYfT2uU/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: data.toString()
+  })
+  .then(res => res.json())
+  .then(response => {
+    popupVideo.style.display = 'none';
+    if (response.result === "success") {
+      message.textContent = '✅ Form submitted successfully!';
+      message.className = 'popup-message success';
+      if ("vibrate" in navigator) navigator.vibrate(200);
+      form.reset();
+      upiDetails.classList.add('hidden');
+      bankDetails.classList.add('hidden');
+    } else {
+      message.textContent = '❌ ' + (response.error || 'Something went wrong.');
+      message.className = 'popup-message error';
+      if ("vibrate" in navigator) navigator.vibrate([100, 50, 100]);
+    }
+  })
+  .catch(error => {
+    popupVideo.style.display = 'none'; // ✅ FIX: was trying to hide 'spinner' which doesn't exist
+    message.textContent = '🚨 Network error. Please try again.';
+    message.className = 'popup-message error';
+    console.error("Error:", error);
+    if ("vibrate" in navigator) navigator.vibrate([100, 50, 100]);
+  });
+});
+
+  /* Hamburger Icon */
+     function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const hamburger = document.getElementById('hamburger');
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('show');
+      hamburger.classList.toggle('active');
+    }
+
+  <!-- Floating Button -->
+  const fabButton = document.getElementById("fabButton");
+  const fabOptions = document.getElementById("fabOptions");
+
+  fabButton.addEventListener("click", () => {
+    fabOptions.classList.toggle("show");
+    fabButton.classList.toggle("open");
+  });
+
+</script>
 </body>
 </html>
