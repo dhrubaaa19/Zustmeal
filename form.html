@@ -16,29 +16,12 @@
       box-sizing: border-box;
     }
 
-    html, body {
-      height: 100%;
-    }
-
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background-color: var(--light-bg);
       color: var(--text-dark);
       line-height: 1.6;
-      display: flex;
-      flex-direction: column;
-    }
-
-    main {
-      flex: 1;
-      max-width: 95%;
-      width: 100%;
-      margin: 2rem auto;
-      padding: 1.5rem;
-      background: white;
-      border-radius: 1rem;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.07);
     }
 
     header {
@@ -61,6 +44,16 @@
     header p {
       font-size: 0.95rem;
       margin: 0.3rem 0 0;
+    }
+
+    main {
+      max-width: 95%;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.07);
     }
 
     form {
@@ -135,9 +128,24 @@
       width: 90%;
     }
 
+    .spinner {
+      border: 5px solid #eee;
+      border-top: 5px solid var(--red);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 1rem;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
     .popup-message {
       font-size: 1rem;
-      margin-top: 1rem;
+      margin-bottom: 1rem;
     }
 
     .popup-message.success {
@@ -156,28 +164,6 @@
       border-radius: 30px;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 1rem;
-    }
-
-    .terms-container {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 16px;
-      line-height: 1.5;
-    }
-
-    .terms-container input[type="checkbox"] {
-      margin-top: 3px;
-      width: 18px;
-      height: 18px;
-      cursor: pointer;
-    }
-
-    .terms-container a {
-      color: red;
-      text-decoration: underline;
-      font-weight: bold;
     }
 
     footer {
@@ -186,7 +172,58 @@
       background: var(--yellow);
       color: var(--text-dark);
       font-size: 0.9rem;
+      margin-top: 2rem;
     }
+
+    @media (max-width: 600px) {
+      button {
+        width: 65%;
+      }
+    }
+
+    @media (min-width: 600px) {
+      main {
+        max-width: 520px;
+      }
+    }
+
+     @keyframes successFadeIn {
+  0% {
+    transform: scale(0.9) translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.popup-message.success {
+  color: green;
+  animation: successFadeIn 0.6s ease-out;
+}
+
+.terms-container {
+  display: flex;
+  align-items: flex-start; /* Align checkbox to the top */
+  gap: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.terms-container input[type="checkbox"] {
+  margin-top: 3px; /* Fine-tune this value to perfectly match your text baseline */
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.terms-container a {
+  color: red;
+  text-decoration: underline;
+  font-weight: bold;
+}
+    
   </style>
 </head>
 <body>
@@ -198,50 +235,99 @@
   <main>
     <form id="plan-form">
       <input type="hidden" id="selected-plan" name="selected_plan" />
-      <label>Full Name</label>
-      <input type="text" required name="name" id="name" />
 
-      <label>Phone</label>
-      <input type="tel" required name="phone" id="phone" pattern="[0-9]{10}" />
+      <div>
+        <label for="name">Full Name</label>
+        <input type="text" required name="name" id="name" placeholder="Your Name" />
+      </div>
 
-      <label>Email</label>
-      <input type="email" required name="email" id="email" />
+      <div>
+        <label for="phone">Contact Number</label>
+        <input type="tel" required name="phone" id="phone" placeholder="10-digit number" pattern="[0-9]{10}" />
+      </div>
 
-      <label>Delivery Address</label>
-      <textarea required name="address" id="address" rows="3"></textarea>
+      <div>
+        <label for="alt_phone">Alternate Contact Number</label>
+        <input type="tel" name="alt_phone" id="alt_phone" placeholder="Optional alternate number" />
+      </div>
 
-      <label>Pin Code</label>
-      <input type="text" required name="pincode" id="pincode" pattern="[0-9]{6}" />
+      <div>
+        <label for="email">Email Address</label>
+        <input type="email" required name="email" id="email" placeholder="zustmeal@gmail.com" />
+      </div>
 
-      <label>Payment Mode</label>
-      <select required name="payment_mode" id="payment_mode">
-        <option value="">Select Payment Mode</option>
-        <option value="upi">UPI</option>
-        <option value="bank">Bank Transfer</option>
-      </select>
+      <div>
+        <label for="address">Full Delivery Address</label>
+        <textarea required name="address" id="address" rows="3" placeholder="Complete address with area, landmark, etc."></textarea>
+      </div>
+
+      <div>
+        <label for="pincode">Pin Code</label>
+        <input type="text" required name="pincode" id="pincode" pattern="[0-9]{6}" placeholder="6-digit PIN" />
+      </div>
+
+      <div>
+        <label for="flatname">House / Flat / PG Name</label>
+        <input type="text" required name="flatname" id="flatname" placeholder="e.g., Green Residency, PG Elite" />
+      </div>
+
+      <div>
+        <label for="slot">Preferred Delivery Time Slot</label>
+        <select required name="slot" id="slot">
+          <option value="">Select Time Slot</option>
+          <option value="1-3">1:00 PM - 3:00 PM</option>
+          <option value="3-5">3:00 PM - 5:00 PM</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="payment_mode">Mode of Payment</label>
+        <select required name="payment_mode" id="payment_mode">
+          <option value="">Select Payment Mode</option>
+          <option value="upi">UPI</option>
+          <option value="bank">Bank Transfer</option>
+        </select>
+      </div>
 
       <div id="upi-details" class="hidden">
         <label>Scan & Pay</label>
-        <img src="your-upi-qr-code.png" style="width: 150px;" />
-        <p><strong>UPI ID:</strong> 1234567789@okbizaxis</p>
+        <img src="your-upi-qr-code.png" alt="UPI QR" style="width: 160px; margin-bottom: 10px;" />
+        <div style="margin-top: 0.5rem;">
+            <span><strong>UPI ID:</strong> 9365294816@okbizaxis</span>
+          <span class="copy-icon" onclick="copyUPI()" style="margin-left: 8px; cursor:pointer;">📋</span>
+        </div>
       </div>
 
-      <div id="bank-details" class="hidden">
-        <label>Bank Details</label>
-        <p>Account: ZustMeal Services</p>
-        <p>Acc No: 1234567890</p>
-        <p>IFSC: HDFC0001234</p>
+      <div id="bank-details" class="hidden" style="margin-top: 1rem;">
+        <label>Bank Transfer Details</label>
+        <div style="line-height: 1.7;">
+          <div><strong>Account Name:</strong> ZustMeal Services</div>
+          <div><strong>Account Number:</strong> 1234567890</div>
+          <div><strong>IFSC:</strong> HDFC0001234</div>
+          <div><strong>Bank Name:</strong> HDFC Bank</div>
+        </div>
       </div>
 
-      <label>Transaction ID</label>
-      <input type="text" required name="transaction_id" id="transaction_id" />
+      <div>
+        <label for="transaction_id">Transaction ID</label>
+        <input type="text" required name="transaction_id" id="transaction_id" placeholder="Enter Transaction Reference" />
+      </div>
+
+      <div id="referral-group" class="hidden">
+        <label for="referral">Referral ID (Optional)</label>
+        <input type="text" name="referral" id="referral" placeholder="e.g. ZUST30" />
+      </div>
 
       <div class="terms-container">
-        <input type="checkbox" id="terms" required />
-        <label for="terms">I agree to <a href="#">Terms</a> and <a href="#">Privacy</a>.</label>
-      </div>
-
-      <button type="submit">Submit</button>
+  <input type="checkbox" id="terms" required />
+  <label for="terms">
+    I have read and agree to the 
+    <a href="terms.html" target="_blank" style="color:red;">Terms & Conditions</a> and 
+    <a href="privacy.html" target="_blank" style="color:red;">Privacy Policy</a> of ZustMeal.
+  </label>
+</div>
+      
+      <button type="submit">Submit My Meal Plan</button>
     </form>
   </main>
 
@@ -249,21 +335,15 @@
     <p>© 2025 ZustMeal. Made with ❤️ for your hunger.</p>
   </footer>
 
-  <!-- Pop-up -->
-  <div id="popup" class="popup-overlay" style="display: none;">
+  <!-- POPUP HTML -->
+  <div id="popup" style="display: none;" class="popup-overlay">
     <div class="popup-box">
-      <video id="popupLoaderVideo" autoplay muted loop playsinline width="140" style="margin: auto; display: block;">
-        <source src="loading.mp4" type="video/mp4" />
-      </video>
-      <video id="popupSuccessVideo" autoplay muted loop playsinline width="140" style="margin: auto; display: none;">
-        <source src="success.mp4" type="video/mp4" />
-      </video>
+      <div id="popupSpinner" class="spinner"></div>
       <p id="popupMessage" class="popup-message">Processing...</p>
       <button id="popupClose" class="popup-close">Close</button>
     </div>
   </div>
 
-  <!-- Script -->
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const plan = urlParams.get('plan');
@@ -274,7 +354,7 @@
     const bankDetails = document.getElementById('bank-details');
 
     const popup = document.getElementById('popup');
-    const popupVideo = document.getElementById('popupVideo');
+    const spinner = document.getElementById('popupSpinner');
     const message = document.getElementById('popupMessage');
     const popupClose = document.getElementById('popupClose');
 
@@ -301,7 +381,7 @@
     });
 
     function copyUPI() {
-      const upiId = "1234567789@okbizaxis";
+     const upiId = "9365294816@okbizaxis";
       navigator.clipboard.writeText(upiId)
         .then(() => alert("✅ UPI ID copied!"))
         .catch(() => alert("❌ Failed to copy."));
@@ -311,81 +391,89 @@
       popup.style.display = 'none';
     });
 
-       document.getElementById('plan-form').addEventListener('submit', function (e) {
-  e.preventDefault();
+        document.getElementById('plan-form').addEventListener('submit', function (e) {
+      e.preventDefault();
 
-  popup.style.display = 'flex';
-  popupVideo.style.display = 'block';
-  message.textContent = 'Processing...';
-  message.className = 'popup-message';
+      popup.style.display = 'flex';
+      spinner.style.display = 'block';
+      message.textContent = 'Processing...';
+      message.className = 'popup-message';
 
-  const form = e.target;
-  const data = new URLSearchParams();
+      const form = e.target;
+      const data = new URLSearchParams();
 
-  data.append("Date", new Date().toLocaleString());
-  data.append("Full Name", form.name.value);
-  data.append("Contact Number", form.phone.value);
-  data.append("Alternate Contact Number", form.alt_phone.value);
-  data.append("Email Address", form.email.value);
-  data.append("Full Delivery Address", form.address.value);
-  data.append("Pin Code", form.pincode.value);
-  data.append("House/Flat/PG Name", form.flatname.value);
-  data.append("Delivery Time Slot", form.slot.value);
-  data.append("Payment Mode", form.payment_mode.value);
-  data.append("Transaction ID", form.transaction_id.value);
-  data.append("Referral ID", form.referral.value || "");
+      data.append("Date", new Date().toLocaleString());
+      data.append("Full Name", form.name.value);
+      data.append("Contact Number", form.phone.value);
+      data.append("Alternate Contact Number", form.alt_phone.value);
+      data.append("Email Address", form.email.value);
+      data.append("Full Delivery Address", form.address.value);
+      data.append("Pin Code", form.pincode.value);
+      data.append("House/Flat/PG Name", form.flatname.value);
+      data.append("Delivery Time Slot", form.slot.value);
+      data.append("Payment Mode", form.payment_mode.value);
+      data.append("Transaction ID", form.transaction_id.value);
+      data.append("Referral ID", form.referral.value || "");
 
-  fetch("https://script.google.com/macros/s/AKfycbweGis6lRGqBzfHToT44_9tKzFw1xsQ4gzEmcDMR8Pk7GHyirlrFtP2Tn3y6tYfT2uU/exec", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    body: data.toString()
-  })
-  .then(res => res.json())
-  .then(response => {
-    popupVideo.style.display = 'none';
-    if (response.result === "success") {
-      message.textContent = '✅ Form submitted successfully!';
-      message.className = 'popup-message success';
-      if ("vibrate" in navigator) navigator.vibrate(200);
-      form.reset();
-      upiDetails.classList.add('hidden');
-      bankDetails.classList.add('hidden');
-    } else {
-      message.textContent = '❌ ' + (response.error || 'Something went wrong.');
-      message.className = 'popup-message error';
-      if ("vibrate" in navigator) navigator.vibrate([100, 50, 100]);
+      fetch("https://script.google.com/macros/s/AKfycbweGis6lRGqBzfHToT44_9tKzFw1xsQ4gzEmcDMR8Pk7GHyirlrFtP2Tn3y6tYfT2uU/exec", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: data.toString()
+      })
+      .then(res => res.json())
+      .then(response => {
+        spinner.style.display = 'none';
+        if (response.result === "success") {
+          message.textContent = '✅ Form submitted successfully';
+          message.className = 'popup-message success';
+          // Trigger vibration on successful form submission
+          if ("vibrate" in navigator) {
+            navigator.vibrate(200); // Vibrate for 200ms
+          }
+          form.reset();
+          upiDetails.classList.add('hidden');
+          bankDetails.classList.add('hidden');
+        } else {
+          message.textContent = '❌ ' + (response.error || 'Something went wrong.');
+          message.className = 'popup-message error';
+          // Trigger vibration on error
+          if ("vibrate" in navigator) {
+            navigator.vibrate([100, 50, 100]); // Pattern: vibrate for 100ms, pause 50ms, vibrate for 100ms
+          }
+        }
+      })
+      .catch(error => {
+        spinner.style.display = 'none';
+        message.textContent = '🚨 Network error. Please try again.';
+        message.className = 'popup-message error';
+        console.error("Error:", error);
+        // Trigger vibration on error
+        if ("vibrate" in navigator) {
+          navigator.vibrate([100, 50, 100]); // Pattern: vibrate for 100ms, pause 50ms, vibrate for 100ms
+        }
+      });
+    });
+
+    function copyUPI() {
+    const upiId = "9365294816@okbizaxis";
+      navigator.clipboard.writeText(upiId)
+        .then(() => {
+           alert("✅ UPI ID copied");
+          // Trigger vibration when UPI ID is copied
+          if ("vibrate" in navigator) {
+            navigator.vibrate(100); // Vibrate for 100ms
+          }
+        })
+        .catch(() => {
+          alert("❌ Failed to copy.");
+          // Trigger vibration on error while copying
+          if ("vibrate" in navigator) {
+            navigator.vibrate([100, 50, 100]); // Pattern: vibrate for 100ms, pause 50ms, vibrate for 100ms
+          }
+        });
     }
-  })
-  .catch(error => {
-    popupVideo.style.display = 'none'; // ✅ FIX: was trying to hide 'spinner' which doesn't exist
-    message.textContent = '🚨 Network error. Please try again.';
-    message.className = 'popup-message error';
-    console.error("Error:", error);
-    if ("vibrate" in navigator) navigator.vibrate([100, 50, 100]);
-  });
-});
-
-  /* Hamburger Icon */
-     function toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      const overlay = document.getElementById('overlay');
-      const hamburger = document.getElementById('hamburger');
-      sidebar.classList.toggle('open');
-      overlay.classList.toggle('show');
-      hamburger.classList.toggle('active');
-    }
-
-  <!-- Floating Button -->
-  const fabButton = document.getElementById("fabButton");
-  const fabOptions = document.getElementById("fabOptions");
-
-  fabButton.addEventListener("click", () => {
-    fabOptions.classList.toggle("show");
-    fabButton.classList.toggle("open");
-  });
-
-</script>
+  </script>
 </body>
 </html>
