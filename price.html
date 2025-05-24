@@ -12,8 +12,14 @@
       --light-bg: #fff8ef;
     }
 
-    body {
+    html, body {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
       margin: 0;
+    }
+
+    body {
       font-family: 'Segoe UI', sans-serif;
       background-color: var(--light-bg);
       color: var(--text-dark);
@@ -28,11 +34,11 @@
     }
 
     header h1 {
-  margin: 0;
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: rgb(220, 40, 30); /* Added line */
-}
+      margin: 0;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: rgb(220, 40, 30);
+    }
 
     main {
       max-width: 1100px;
@@ -40,6 +46,7 @@
       padding: 2rem;
       display: grid;
       gap: 2rem;
+      flex: 1;
     }
 
     .plan-card {
@@ -103,10 +110,8 @@
       background: var(--yellow);
       color: var(--text-dark);
       font-size: 0.9rem;
-      margin-top: 2rem;
     }
 
-    /* Red-Yellow Rotating Border for Trial Plan */
     .rotating-border-wrapper {
       position: relative;
       border-radius: 0.75rem;
@@ -144,14 +149,6 @@
       100% {
         background-position: 0% 50%;
       }
-    }
-
-    /* Floating Button */
-      body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      height: 200vh;
     }
 
     .fab-container {
@@ -245,158 +242,17 @@
         height: 45px;
       }
     }
-    
-/* Sidebar */
-  #sidebar {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 60%; /* ↓ reduced from 80% */
-  max-width: 240px; /* ↓ reduced from 300px */
-  height: 100%;
-  background-color: white;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
-  z-index: 1001;
-  transform: translateX(100%);
-  opacity: 0;
-  transition: transform 0.5s ease, opacity 0.5s ease;
-  padding: 2rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: var(--gap-unit);
-}
-
-    #sidebar.open {
-      transform: translateX(0);
-      opacity: 1;
-    }
-
-    #sidebar a {
-      color: black;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.3rem;
-    }
-
-    .follow-text {
-      font-weight: bold;
-      font-size: 1.3rem;
-      color: black;
-    }
-
-    .social-icons {
-      display: flex;
-      gap: 16.3px;
-      align-items: center;
-    }
-
-    .social-icons img {
-      height: 2.5rem;
-      width: auto;
-    }
-
-    /* Hamburger Icon */
-    .hamburger {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1100;
-      cursor: pointer;
-      width: 30px;
-      height: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .bar {
-      height: 3px;
-      width: 100%;
-      background-color: red;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-
-    .hamburger.active .bar1 {
-      transform: rotate(48deg) translate(5px, 5px);
-    }
-
-    .hamburger.active .bar2 {
-      opacity: 0;
-    }
-
-    .hamburger.active .bar3 {
-      transform: rotate(-48deg) translate(5px, -5px);
-    }
-
-    /* Overlay */
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-      display: none;
-    }
-
-    .overlay.show {
-      display: block;
-    }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 1.5rem;
-      }
-
-      .hero h2 {
-        font-size: 1rem;
-      }
-
-      .hero button {
-        font-size: 0.9rem;
-        padding: 8px 16px;
-      }
-
-      #sidebar {
-        width: 100%;
-        padding: 1.5rem 1rem;
-        gap: 30px;
-      }
-
-      #sidebar a,
-      .follow-text {
-        font-size: 0.95rem;
-      }
-
-      .social-icons img {
-        height: 1.25rem;
-      }
-
-      .hamburger {
-        width: 26px;
-        height: 22px;
-      }
-
-      .bar {
-        height: 3px;
-      }
-    }
 
     .zust-logo {
-  height: 4.3rem;
-  margin-top: 0.5rem;
-}
+      height: 4.3rem;
+      margin-top: 0.5rem;
+    }
 
-@media (max-width: 600px) {
-  .zust-logo {
-    height: 3.5rem; /* Adjust the size as per your preference */
-  }
-}
-      
+    @media (max-width: 600px) {
+      .zust-logo {
+        height: 3.5rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -406,7 +262,7 @@
   </header>
 
   <main>
-    <!-- 3-Day Trial Plan with rotating red-yellow border -->
+    <!-- Trial Plan -->
     <div class="rotating-border-wrapper">
       <div class="plan-card">
         <h2>3-Day Trial Plan</h2>
@@ -418,7 +274,7 @@
       </div>
     </div>
 
-    <!-- Mid-Month Magic -->
+    <!-- Monthly Munchies -->
     <div class="plan-card">
       <h2>Monthly Munchies</h2>
       <p>₹<strong>1601 for 1 meal (Lunch/Dinner)</strong></p>
@@ -426,11 +282,10 @@
       <p><strong>Your month, made tastier.</strong> Monthly Munchies brings you daily meals crafted for comfort, energy, and pure satisfaction.</p>
       <p class="duration">Duration: One Month</p>
       <p class="working-days">* 26 working days</p>
-      <!-- For Mid-Month Magic -->
-<button onclick="window.location.href='form.html?plan=mid'">Select Plan</button>
+      <button onclick="window.location.href='form.html?plan=monthly'">Select Plan</button>
     </div>
 
-    <!-- Monthly Munchies -->
+    <!-- Mid-Month Magic -->
     <div class="plan-card">
       <h2>Mid-Month Magic</h2>
       <p>₹<strong>1001 for one meal (Lunch/Dinner)</strong></p>
@@ -438,48 +293,38 @@
       <p><strong>Perfect for the busy half</strong> — Mid-Month Magic brings you half month of tasty meals, just when you need them most.</p>
       <p class="duration">Duration: Half-Month</p>
       <p class="working-days">* 13 working days</p>
-      <!-- For Monthly Munchies -->
-<button onclick="window.location.href='form.html?plan=monthly'">Select Plan</button>
+      <button onclick="window.location.href='form.html?plan=mid'">Select Plan</button>
     </div>
   </main>
+
   <!-- Floating Action Button -->
-<div class="fab-container">
-  <div class="fab-options" id="fabOptions">
-    <a href="tel:+919365294816" class="fab-icon">
-      <img src="phone.png" alt="Phone">
-    </a>
-    <a href="https://wa.me/919365294816?text=Hello%20Zustmeal.%20I%E2%80%99m%20new%20in%20the%20city%20and%20interested%20in%20your%20meal%20service%2C%20hoping%20to%20find%20a%20little%20comfort%20and%20care%20in%20every%20bite%20❤️" class="fab-icon">
-  <img src="whatsapp.png" alt="WhatsApp">
-    </a>
+  <div class="fab-container">
+    <div class="fab-options" id="fabOptions">
+      <a href="tel:+919365294816" class="fab-icon">
+        <img src="phone.png" alt="Phone">
+      </a>
+      <a href="https://wa.me/919365294816?text=Hello%20Zustmeal.%20I%E2%80%99m%20new%20in%20the%20city%20and%20interested%20in%20your%20meal%20service%2C%20hoping%20to%20find%20a%20little%20comfort%20and%20care%20in%20every%20bite%20❤️" class="fab-icon">
+        <img src="whatsapp.png" alt="WhatsApp">
+      </a>
+    </div>
+    <button class="fab-button" id="fabButton">
+      <img id="logo" src="your-logo.png" alt="Logo Icon">
+      <img id="close" src="x-logo.png" alt="Close Icon">
+    </button>
   </div>
-  <button class="fab-button" id="fabButton">
-    <img id="logo" src="your-logo.png" alt="Logo Icon">
-    <img id="close" src="x-logo.png" alt="Close Icon">
-  </button>
-</div>
+
   <footer>
     <p>© 2025 ZustMeal. Made with ❤️ for your hunger.</p>
   </footer>
-  
+
   <script>
-  <!-- Hamburger Icon -->
-     function toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      const overlay = document.getElementById('overlay');
-      const hamburger = document.getElementById('hamburger');
-      sidebar.classList.toggle('open');
-      overlay.classList.toggle('show');
-      hamburger.classList.toggle('active');
-    }
+    const fabButton = document.getElementById("fabButton");
+    const fabOptions = document.getElementById("fabOptions");
 
-  <!-- Floating Button -->
-  const fabButton = document.getElementById("fabButton");
-  const fabOptions = document.getElementById("fabOptions");
-
-  fabButton.addEventListener("click", () => {
-    fabOptions.classList.toggle("show");
-    fabButton.classList.toggle("open");
-  });
+    fabButton.addEventListener("click", () => {
+      fabOptions.classList.toggle("show");
+      fabButton.classList.toggle("open");
+    });
   </script>
 </body>
 </html>
