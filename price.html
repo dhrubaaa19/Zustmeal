@@ -99,15 +99,17 @@
 
     footer {
       text-align: center;
-      padding: 2rem;
+      padding: 1.5rem;
       background: var(--yellow);
       color: var(--text-dark);
+      font-size: 0.9rem;
+      margin-top: 2rem;
     }
 
     /* Red-Yellow Rotating Border for Trial Plan */
     .rotating-border-wrapper {
       position: relative;
-      border-radius: 1rem;
+      border-radius: 0.75rem;
       padding: 4px;
       background: linear-gradient(270deg, #dc281e, #ffc82d, #dc281e);
       background-size: 600% 600%;
@@ -118,7 +120,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      border-radius: 1rem;
+      border-radius: 0.75rem;
       background: inherit;
       z-index: 0;
       filter: blur(8px);
@@ -129,7 +131,7 @@
       position: relative;
       z-index: 1;
       background: #fff;
-      border-radius: 1rem;
+      border-radius: 0.75rem;
     }
 
     @keyframes rotateBorder {
